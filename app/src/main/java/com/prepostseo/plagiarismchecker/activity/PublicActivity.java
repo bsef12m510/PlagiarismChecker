@@ -1,0 +1,137 @@
+package com.prepostseo.plagiarismchecker.activity;
+
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.Toast;
+
+import com.prepostseo.plagiarismchecker.Login.fragment.LoginFragment;
+import com.prepostseo.plagiarismchecker.Login.response.LoginResponse;
+import com.prepostseo.plagiarismchecker.R;
+import com.prepostseo.plagiarismchecker.register.fragment.RegisterFragment;
+import com.prepostseo.plagiarismchecker.register.fragment.VerifyFragment;
+import com.prepostseo.plagiarismchecker.register.response.RegisterResponse;
+
+
+public class PublicActivity extends AppCompatActivity implements LoginFragment.OnLoginResponseListener,
+        RegisterFragment.OnRegisterResponseListener, VerifyFragment.OnVerifyResponseListener {
+
+    private Integer user_id;
+    private FrameLayout fragmentContainer;
+    private FragmentManager fm;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_public);
+        initialize();
+        displayFragment(1);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_public, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    public void initialize() {
+        fragmentContainer = (FrameLayout) findViewById(R.id.fragmentContainer);
+    }
+
+    public void displayFragment(int key) {
+        // get fragment manager
+        fm = getFragmentManager();
+
+        // replace
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.setCustomAnimations(R.anim.slide_in_left,
+                R.anim.slide_out_right,R.anim.slide_in_left,
+                R.anim.slide_out_right);
+        if (key == 1)
+            ft.replace(R.id.fragmentContainer, new LoginFragment());
+        else if (key == 2)
+            ft.replace(R.id.fragmentContainer, new RegisterFragment());
+        else if (key == 3) {
+            VerifyFragment verifyFragment = new VerifyFragment();
+            verifyFragment.setUser_id(user_id.toString());
+            ft.replace(R.id.fragmentContainer, verifyFragment);
+        }
+
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    @Override
+    public void onLoginResponse(LoginResponse loginResponseData) {
+        if(loginResponseData != null && loginResponseData.getVerified().equalsIgnoreCase("1")) {
+            if(loginResponseData.getApi_key()!=null)
+                storeApiKey(loginResponseData.getApi_key());
+            Toast.makeText(PublicActivity.this, "Login with user : " + loginResponseData.getUser_email(), Toast.LENGTH_SHORT).show();
+            startSecureActivity();
+        }else{
+            Toast.makeText(PublicActivity.this, "User not verified" , Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRegisterClick() {
+        displayFragment(2);
+    }
+
+    @Override
+    public void onRegisterResponse(RegisterResponse registerResponse) {
+        if (registerResponse.getApiKey() != null)
+            storeApiKey(registerResponse.getApiKey());
+        if (registerResponse.getUserId() != null) {
+            user_id = registerResponse.getUserId();
+            Toast.makeText(PublicActivity.this, "User id : " + registerResponse.getUserId().toString(), Toast.LENGTH_SHORT).show();
+            displayFragment(3);
+        }
+    }
+
+    @Override
+    public void onVerifyResponse(boolean isVerified) {
+        if (isVerified) {
+            Toast.makeText(PublicActivity.this, "Verified", Toast.LENGTH_SHORT).show();
+            startSecureActivity();
+        }
+    }
+
+    public void storeApiKey(String api_key) {
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.prepostseo.plagiarismchecker", Context.MODE_PRIVATE);
+
+        prefs.edit().putString("api_key", api_key).apply();
+    }
+
+    public void startSecureActivity(){
+        Intent intent = new Intent(PublicActivity.this,SecureActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+}
