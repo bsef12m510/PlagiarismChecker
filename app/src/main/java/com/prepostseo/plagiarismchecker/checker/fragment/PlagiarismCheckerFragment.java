@@ -3,6 +3,7 @@ package com.prepostseo.plagiarismchecker.checker.fragment;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,14 @@ import android.widget.Toast;
 import com.prepostseo.plagiarismchecker.R;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,7 +161,8 @@ public class PlagiarismCheckerFragment extends Fragment {
             docPaths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS));
             if (docPaths.size() > 0) {
                 Toast.makeText(getActivity(), docPaths.get(0), Toast.LENGTH_SHORT).show();
-                extractTextFromPdf(docPaths.get(0));
+//                extractTextFromPdf(docPaths.get(0));
+                readFromTextFile(docPaths.get(0));
             }
         }
     }
@@ -171,6 +182,36 @@ public class PlagiarismCheckerFragment extends Fragment {
         return fileContent;
     }
 
+    private String readFromTextFile(String filePath) {
+
+        String ret = "";
+
+        try {
+//            FileInputStream fis = new FileInputStream(new File(filePath));
+            InputStream inputStream = new FileInputStream(new File(filePath));
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
+    }
 
     /**
      * This interface must be implemented by activities that contain this
