@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -12,12 +13,16 @@ import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prepostseo.plagiarismchecker.R;
@@ -25,6 +30,10 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
 
+import org.docx4j.XmlUtils;
+import org.docx4j.convert.out.html.HtmlExporterNonXSLT;
+import org.docx4j.model.images.ConversionImageHandler;
+import org.docx4j.openpackaging.io.LoadFromZipNG;
 import org.docx4j.openpackaging.packages.OpcPackage;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
@@ -275,17 +284,41 @@ public class PlagiarismCheckerFragment extends Fragment {
     public void doc4jx(String fileName) {
 
 
+
         try {
-            InputStream inputStream = new FileInputStream(new File(fileName));
-
-
-//            OpcPackage opcPackage = OpcPackage.load(inputStream);
+            InputStream is = new FileInputStream(new File(fileName));
+//			File file = new File(this.getFilesDir(), "samples.docx");
+//			OpcPackage opcPackage = OpcPackage.load(is);
 //			WordprocessingMLPackage wordMLPackage = (WordprocessingMLPackage)opcPackage;
-            WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(new java.io.File(fileName));
-            MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
+//			WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(is);
+//			MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
+
+
+            final LoadFromZipNG loader = new LoadFromZipNG();
+            WordprocessingMLPackage wordMLPackage = (WordprocessingMLPackage)loader.get(is);
+
+            String IMAGE_DIR_NAME = "images";
+
+            String baseURL = getActivity().getDir(IMAGE_DIR_NAME, Context.MODE_WORLD_READABLE).toURL().toString();
+            System.out.println(baseURL); // file:/data/data/com.example.HelloAndroid/app_images/
+
+            // Uncomment this to write image files to file system
+            ConversionImageHandler conversionImageHandler = new AndroidFileConversionImageHandler( IMAGE_DIR_NAME, // <-- don't use a path separator here
+                    baseURL, false, getActivity());
+
+            // Uncomment to use a base 64 encoded data URI for each image
+//			ConversionImageHandler conversionImageHandler = new AndroidDataUriImageHandler();
+
+            HtmlExporterNonXSLT withoutXSLT = new HtmlExporterNonXSLT(wordMLPackage, conversionImageHandler);
+
+            String html = XmlUtils.w3CDomNodeToString(withoutXSLT.export());
+            content.setText(html);
+
         } catch (Exception e) {
-            e.getCause();
+            e.printStackTrace();
+            //finish();
         }
+
 
     }
 
