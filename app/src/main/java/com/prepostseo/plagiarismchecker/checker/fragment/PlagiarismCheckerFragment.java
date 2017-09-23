@@ -3,7 +3,7 @@ package com.prepostseo.plagiarismchecker.checker.fragment;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -24,6 +24,12 @@ import com.prepostseo.plagiarismchecker.R;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
+
+import org.docx4j.openpackaging.packages.OpcPackage;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,6 +42,7 @@ import java.util.List;
 
 import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -162,17 +169,19 @@ public class PlagiarismCheckerFragment extends Fragment {
             if (docPaths.size() > 0) {
                 Toast.makeText(getActivity(), docPaths.get(0), Toast.LENGTH_SHORT).show();
 //                extractTextFromPdf(docPaths.get(0));
-                readFromTextFile(docPaths.get(0));
+//                readFromTextFile(docPaths.get(0));
+//                readDocxFile(docPaths.get(0));
+                doc4jx(docPaths.get(0));
             }
         }
     }
 
-    public String extractTextFromPdf(String filePath){
-        String fileContent="";
+    public String extractTextFromPdf(String filePath) {
+        String fileContent = "";
         try {
             PdfReader reader = new PdfReader(filePath);
             int n = reader.getNumberOfPages();
-            String str=PdfTextExtractor.getTextFromPage(reader,1); //Extracting the content from a particular page.
+            String str = PdfTextExtractor.getTextFromPage(reader, 1); //Extracting the content from a particular page.
 //            System.out.println(str);
             content.setText(str);
             reader.close();
@@ -190,27 +199,94 @@ public class PlagiarismCheckerFragment extends Fragment {
 //            FileInputStream fis = new FileInputStream(new File(filePath));
             InputStream inputStream = new FileInputStream(new File(filePath));
 
-            if ( inputStream != null ) {
+            if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                while ((receiveString = bufferedReader.readLine()) != null) {
                     stringBuilder.append(receiveString);
                 }
 
                 inputStream.close();
                 ret = stringBuilder.toString();
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
         }
 
         return ret;
+    }
+
+
+
+   /* public static void readDocFile(String fileName) {
+
+        try {
+            File file = new File(fileName);
+            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
+
+            HWPFDocument doc = new HWPFDocument(fis);
+
+            WordExtractor we = new WordExtractor(doc);
+
+            String[] paragraphs = we.getParagraphText();
+
+            System.out.println("Total no of paragraph "+paragraphs.length);
+            for (String para : paragraphs) {
+                System.out.println(para.toString());
+            }
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }*/
+
+   /* public static void readDocxFile(String fileName) {
+
+        try {
+            File file = new File(fileName);
+            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
+
+
+
+           *//* Tika tika = new Tika();
+            String extractedText = tika.parseToString(file);*//*
+
+            XWPFDocument document = new XWPFDocument(fis);
+
+            List<XWPFParagraph> paragraphs = document.getParagraphs();
+
+            System.out.println("Total no of paragraph "+paragraphs.size());
+            for (XWPFParagraph para : paragraphs) {
+                System.out.println(para.getText());
+            }
+            fis.close();
+        } catch (Exception e) {
+            e.getCause();
+
+        }
+    }*/
+
+    public void doc4jx(String fileName) {
+
+
+        try {
+            InputStream inputStream = new FileInputStream(new File(fileName));
+
+
+//            OpcPackage opcPackage = OpcPackage.load(inputStream);
+//			WordprocessingMLPackage wordMLPackage = (WordprocessingMLPackage)opcPackage;
+            WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(new java.io.File(fileName));
+            MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
+        } catch (Exception e) {
+            e.getCause();
+        }
+
     }
 
     /**
