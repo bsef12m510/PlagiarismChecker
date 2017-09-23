@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.NonNull;
@@ -281,12 +282,19 @@ public class PlagiarismCheckerFragment extends Fragment {
         }
     }*/
 
-    public void doc4jx(String fileName) {
+    public void doc4jx(final String fileName) {
+        final ProgressDialog pd =new ProgressDialog(getActivity());
+
+        pd.show();
 
 
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                //TODO your background code
+                try {
 
-        try {
-            InputStream is = new FileInputStream(new File(fileName));
+                    InputStream is = new FileInputStream(new File(fileName));
 //			File file = new File(this.getFilesDir(), "samples.docx");
 //			OpcPackage opcPackage = OpcPackage.load(is);
 //			WordprocessingMLPackage wordMLPackage = (WordprocessingMLPackage)opcPackage;
@@ -294,30 +302,53 @@ public class PlagiarismCheckerFragment extends Fragment {
 //			MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
 
 
-            final LoadFromZipNG loader = new LoadFromZipNG();
-            WordprocessingMLPackage wordMLPackage = (WordprocessingMLPackage)loader.get(is);
+                    final LoadFromZipNG loader = new LoadFromZipNG();
+                    WordprocessingMLPackage wordMLPackage = (WordprocessingMLPackage)loader.get(is);
 
-            String IMAGE_DIR_NAME = "images";
+                    String IMAGE_DIR_NAME = "images";
 
-            String baseURL = getActivity().getDir(IMAGE_DIR_NAME, Context.MODE_WORLD_READABLE).toURL().toString();
-            System.out.println(baseURL); // file:/data/data/com.example.HelloAndroid/app_images/
+                    String baseURL = getActivity().getDir(IMAGE_DIR_NAME, Context.MODE_WORLD_READABLE).toURL().toString();
+                    System.out.println(baseURL); // file:/data/data/com.example.HelloAndroid/app_images/
 
-            // Uncomment this to write image files to file system
-            ConversionImageHandler conversionImageHandler = new AndroidFileConversionImageHandler( IMAGE_DIR_NAME, // <-- don't use a path separator here
-                    baseURL, false, getActivity());
+                    // Uncomment this to write image files to file system
+                    ConversionImageHandler conversionImageHandler = new AndroidFileConversionImageHandler( IMAGE_DIR_NAME, // <-- don't use a path separator here
+                            baseURL, false, getActivity());
 
-            // Uncomment to use a base 64 encoded data URI for each image
+                    // Uncomment to use a base 64 encoded data URI for each image
 //			ConversionImageHandler conversionImageHandler = new AndroidDataUriImageHandler();
 
-            HtmlExporterNonXSLT withoutXSLT = new HtmlExporterNonXSLT(wordMLPackage, conversionImageHandler);
+                    HtmlExporterNonXSLT withoutXSLT = new HtmlExporterNonXSLT(wordMLPackage, conversionImageHandler);
 
-            String html = XmlUtils.w3CDomNodeToString(withoutXSLT.export());
-            content.setText(html);
+                    final String html = XmlUtils.w3CDomNodeToString(withoutXSLT.export());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            //finish();
-        }
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+//stuff that updates ui
+                            content.setText(html);
+                            pd.hide();
+
+                        }
+                    });
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            pd.hide();
+
+                        }
+                    });
+                }
+
+            }
+        });
+
+
 
 
     }
