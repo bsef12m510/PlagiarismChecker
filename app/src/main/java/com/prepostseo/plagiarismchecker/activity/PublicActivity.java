@@ -103,6 +103,13 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
     }
 
     @Override
+    public void onLoginClick() {
+        displayFragment(1);
+    }
+
+
+
+    @Override
     public void onRegisterResponse(RegisterResponse registerResponse) {
         if (registerResponse.getApiKey() != null)
             storeApiKey(registerResponse.getApiKey());

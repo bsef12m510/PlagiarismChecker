@@ -2,6 +2,7 @@ package com.prepostseo.plagiarismchecker.register.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.prepostseo.plagiarismchecker.R;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
@@ -35,6 +37,7 @@ public class RegisterFragment extends Fragment {
     private View contentView;
     private Button registerButton;
     private EditText name,email,pass;
+    private TextView accountExist;
     private ProgressDialog pd;
 
     public RegisterFragment() {
@@ -65,17 +68,30 @@ public class RegisterFragment extends Fragment {
         email = (EditText)contentView.findViewById(R.id.email);
         pass = (EditText)contentView.findViewById(R.id.password);
         registerButton = (Button)contentView.findViewById(R.id.registerButton);
+        accountExist = (TextView) contentView.findViewById(R.id.alreadyAccountTextView);
+        underLineTetView(accountExist);
     }
 
     public void setClickListeners(){
+        accountExist.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onLoginClick();
+                }
+            }
+        });
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 callRegisterService();
             }
         });
-    }
 
+    }
+    void underLineTetView(TextView textView) {
+        textView.setPaintFlags(textView.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onSuccessfulRegister(RegisterResponse registerResponse) {
         if (mListener != null) {
@@ -139,6 +155,7 @@ public class RegisterFragment extends Fragment {
     public interface OnRegisterResponseListener {
         // TODO: Update argument type and name
         public void onRegisterResponse(RegisterResponse registerResponse);
+        public void onLoginClick();
     }
 
 }

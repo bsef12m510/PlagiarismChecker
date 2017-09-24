@@ -2,6 +2,7 @@ package com.prepostseo.plagiarismchecker.Login.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.prepostseo.plagiarismchecker.Login.response.LoginResponse;
 import com.prepostseo.plagiarismchecker.Login.restInterface.LoginService;
@@ -35,7 +37,8 @@ public class LoginFragment extends Fragment {
     private LoginResponse loginResponseData;
     private OnLoginResponseListener mListener;
     private ProgressDialog pd;
-    private Button registerButton, loginButton;
+    private Button  loginButton;
+    private TextView registerButton;
     private View contentView;
 
     public LoginFragment() {
@@ -61,12 +64,17 @@ public class LoginFragment extends Fragment {
     }
 
     public void initialize(View contentView){
-        registerButton = (Button)contentView.findViewById(R.id.registerButton);
+        registerButton = (TextView) contentView.findViewById(R.id.registerTextView);
+        underLineTetView(registerButton);
         loginButton = (Button)contentView.findViewById(R.id.loginButton);
         email = (EditText)contentView.findViewById(R.id.email);
         password = (EditText)contentView.findViewById(R.id.password);
         email.setText("913kc@gmail.com");
         password.setText("123");
+    }
+    void underLineTetView(TextView textView)
+    {
+        textView.setPaintFlags(textView.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
     }
 
     public void setClickListeners(){
