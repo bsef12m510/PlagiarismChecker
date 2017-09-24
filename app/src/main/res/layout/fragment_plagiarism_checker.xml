@@ -16,6 +16,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/uploadFile"
+        android:text="Upload File"
         android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/check"
+        android:text="Check"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/uploadFile"
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

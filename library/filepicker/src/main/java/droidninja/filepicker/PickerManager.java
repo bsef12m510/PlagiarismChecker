@@ -171,7 +171,8 @@ public class PickerManager {
         String[] pdfs = {"pdf"};
         fileTypes.add(new FileType(FilePickerConst.PDF,pdfs,R.drawable.ic_pdf));
 
-        String[] docs = {"doc","docx", "dot","dotx"};
+//        String[] docs = {"doc","docx", "dot","dotx"};
+        String[] docs = {"docx"};
         fileTypes.add(new FileType(FilePickerConst.DOC,docs,R.drawable.ic_word));
 
        /* String[] ppts = {"ppt","pptx"};
