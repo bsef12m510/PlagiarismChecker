@@ -2,9 +2,13 @@ package com.prepostseo.plagiarismchecker.register.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.chaos.view.PinView;
 import com.prepostseo.plagiarismchecker.R;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
 import com.prepostseo.plagiarismchecker.register.response.RegisterResponse;
@@ -34,10 +39,11 @@ public class VerifyFragment extends Fragment {
 
     private OnVerifyResponseListener mListener;
     private Button verifyButton;
-    private EditText verification_code;
+    private PinView verification_code;
     private String user_id;
     private View contentView;
     private ProgressDialog pd;
+    private boolean isButtonEnabled =false;
 
     public VerifyFragment() {
         // Required empty public constructor
@@ -70,15 +76,40 @@ public class VerifyFragment extends Fragment {
     }
 
     public void initialize(){
-        verification_code = (EditText)contentView.findViewById(R.id.code);
+        verification_code = (PinView)contentView.findViewById(R.id.code);
+        verification_code.setAnimationEnable(false);
+        verification_code.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()== 4) {
+                    isButtonEnabled=true;
+                    verifyButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                }else {
+                    isButtonEnabled = false;
+                    verifyButton.setBackgroundColor(getResources().getColor(R.color.buttonGray));
+                }
+            }
+        });
         verifyButton = (Button)contentView.findViewById(R.id.verifyButton);
     }
 
     public void setClickListeners(){
+
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callVerifyService();
+                if(isButtonEnabled)
+                    callVerifyService();
             }
         });
     }

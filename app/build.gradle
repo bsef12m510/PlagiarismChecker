@@ -55,6 +55,8 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile project(':library:filepicker')
+    //only for pinview
+    compile 'com.chaos.view:pinview:1.1.0'
     //compile 'com.droidninja:filepicker:2.0.8'
 
     // compile 'com.github.aerdy:Android-FilePickerFilterLibrary:-SNAPSHOT'

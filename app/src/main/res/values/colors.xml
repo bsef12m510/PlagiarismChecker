@@ -5,5 +5,8 @@
     <item name="colorPrimaryDark" type="color">#2aa338</item>
     <item name="colorAccent" type="color">#32c843</item>
     <item name="colorBlack" type="color">#000</item>
-    <item name="buttonColor" type="color">#28c63b</item>
+    <item name="buttonColor" type="color">#28c63b</item>aaa
+    <item name="buttonGray" type="color">#aaa</item>
+
+
 </resources>
