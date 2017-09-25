@@ -20,6 +20,6 @@ import retrofit2.http.Query;
 public interface LoginService {
 
     @Multipart
-    @POST("loginuser")
+    @POST("app/loginuser")
     Call<LoginResponse> login(@Part("email") RequestBody name, @Part("pass") RequestBody email);
 }

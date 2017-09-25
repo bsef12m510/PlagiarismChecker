@@ -14,10 +14,10 @@ import retrofit2.http.Part;
  */
 public interface RegisterService {
     @Multipart
-    @POST("register")
+    @POST("app/register")
     Call<RegisterResponse> register(@Part("name") RequestBody name, @Part("email") RequestBody email, @Part("pass") RequestBody pass);
 
     @Multipart
-    @POST("verifyEmail")
+    @POST("app/verifyEmail")
     Call<RegisterResponse> verify( @Part("code") RequestBody code, @Part("user_id") RequestBody user_id);
 }
