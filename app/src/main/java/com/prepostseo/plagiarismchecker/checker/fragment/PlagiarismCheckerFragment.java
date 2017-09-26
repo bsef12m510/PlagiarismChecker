@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import com.prepostseo.plagiarismchecker.R;
+import com.prepostseo.plagiarismchecker.activity.MainDrawerActivity;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
 import com.prepostseo.plagiarismchecker.checker.response.PlagiarismResponse;
 import com.prepostseo.plagiarismchecker.checker.restInterface.PlagiarismService;
@@ -75,10 +76,14 @@ public class PlagiarismCheckerFragment extends Fragment {
     private String key = "";
     private ProgressDialog pd;
 
+
     public PlagiarismCheckerFragment() {
         // Required empty public constructor
     }
-
+    void setTitle()
+    {
+        ((Activity) getActivity()).setTitle(getResources().getString(R.string.app_name));
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,8 +96,10 @@ public class PlagiarismCheckerFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setTitle();
         initialize();
         getKey();
+
 //        setClickListeners();
 //        pd = new ProgressDialog(getActivity());
 

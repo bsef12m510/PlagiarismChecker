@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="pinViewStyle">@style/PinWidget.PinView</item>
+        <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
     </style>
     <!-- Splash Screen theme. -->
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -21,6 +22,9 @@
     </style>
 
 
+    <style name="WindowTitleBackground">
+        <item name="android:background">@color/colorAccent</item>
+    </style>
     <!-- components styles -->
     <style name="EditText">
         <item name="android:backgroundTint">@android:color/black</item>
@@ -39,5 +43,12 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@android:color/darker_gray</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 </resources>

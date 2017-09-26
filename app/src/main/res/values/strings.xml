@@ -4,7 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_secure">SecureActivity</string>
     <string name="login_now">Login Now</string>
@@ -21,4 +21,10 @@
     <string name="please_check_your_email_you_will_receive_a_verification_code_via_email">Please check your Email you will receive a verification code via Email</string>
     <string name="hash">####</string>
     <string name="confirm">Confirm</string>
+    <string name="title_activity_main_drawer">MainDrawerActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="account">Account</string>
+    <string name="logout">Logout</string>
 </resources>

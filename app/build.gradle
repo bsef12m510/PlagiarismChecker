@@ -15,7 +15,7 @@ android {
 
     sourceSets {
         main {
-            resources.includes = [ 'src/main/assets/docx4j.properties' ]
+            resources.includes = ['src/main/assets/docx4j.properties']
         }
     }
 
@@ -36,7 +36,7 @@ android {
         }
     }
     packagingOptions {
-        pickFirst  'META-INF/*'
+        pickFirst 'META-INF/*'
     }
 }
 
@@ -45,23 +45,15 @@ android {
     maven { url 'https://jitpack.io' }
 }*/
 
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:design:22.2.0'
     // retrofit, gson
-    compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile project(':library:filepicker')
     //only for pinview
-    compile 'com.chaos.view:pinview:1.1.0'
     //compile 'com.droidninja:filepicker:2.0.8'
 
     // compile 'com.github.aerdy:Android-FilePickerFilterLibrary:-SNAPSHOT'
-    compile 'com.android.support:multidex:1.0.0'
-    compile 'com.itextpdf:itext-pdfa:5.5.5'
     compile files('libs/JAXBNamespacePrefixMapper-2.2.4.jar')
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
@@ -82,4 +74,14 @@ dependencies {
     compile files('libs/txw2-20110809.jar')
     compile files('libs/w3c-css.jar')
     compile files('libs/jsoup-1.10.3.jar')
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:design:22.2.0'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.chaos.view:pinview:1.1.0'
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.itextpdf:itext-pdfa:5.5.5'
+    compile 'com.android.support.constraint:constraint-layout:+'
 }

@@ -91,7 +91,7 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
             if(loginResponseData.getApi_key()!=null)
                 storeApiKey(loginResponseData.getApi_key());
             Toast.makeText(PublicActivity.this, "Login with user : " + loginResponseData.getUser_email(), Toast.LENGTH_SHORT).show();
-            startSecureActivity();
+            startDrawerActivity();
         }else{
             Toast.makeText(PublicActivity.this, "User not verified" , Toast.LENGTH_SHORT).show();
         }
@@ -124,7 +124,7 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
     public void onVerifyResponse(boolean isVerified) {
         if (isVerified) {
             Toast.makeText(PublicActivity.this, "Verified", Toast.LENGTH_SHORT).show();
-            startSecureActivity();
+            startDrawerActivity();
         }
     }
 
@@ -135,8 +135,9 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
         prefs.edit().putString("api_key", api_key).apply();
     }
 
-    public void startSecureActivity(){
-        Intent intent = new Intent(PublicActivity.this,SecureActivity.class);
+    public void startDrawerActivity(){
+
+        Intent intent = new Intent(PublicActivity.this,MainDrawerActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
