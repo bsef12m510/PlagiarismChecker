@@ -7,6 +7,8 @@
     <item name="colorBlack" type="color">#000</item>
     <item name="buttonColor" type="color">#28c63b</item>aaa
     <item name="buttonGray" type="color">#aaa</item>
+    <item name="buttonUploadFile" type="color">#2989c6</item>
+
 
 
 </resources>

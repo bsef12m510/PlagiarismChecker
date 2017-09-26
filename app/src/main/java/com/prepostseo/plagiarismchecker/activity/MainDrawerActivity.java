@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,6 +24,7 @@ import com.prepostseo.plagiarismchecker.checker.fragment.PlagiarismCheckerFragme
 public class MainDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PlagiarismCheckerFragment.OnFragmentInteractionListener {
 
+    private static String TAG_PLAG = "plagFrag";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +42,7 @@ public class MainDrawerActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        replaceFragment(new PlagiarismCheckerFragment());
+        replaceFragment(new PlagiarismCheckerFragment(),TAG_PLAG);
     }
 
     @Override
@@ -84,7 +86,7 @@ public class MainDrawerActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
             Fragment fragment = new PlagiarismCheckerFragment();
-            replaceFragment(fragment);
+            replaceFragment(fragment,TAG_PLAG);
             // Handle the camera action
         } else if (id == R.id.nav_account) {
 
@@ -107,11 +109,25 @@ public class MainDrawerActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
-    void replaceFragment(Fragment fragment) {
+    void replaceFragment(Fragment fragment,String TAG) {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
+                .replace(R.id.content_frame, fragment,TAG)
                 .commit();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //preventing default implementation previous to android.os.Build.VERSION_CODES.ECLAIR
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment fragment = getFragmentManager().findFragmentByTag("plagFrag");
+        fragment.onActivityResult(requestCode, resultCode, data);
     }
 }

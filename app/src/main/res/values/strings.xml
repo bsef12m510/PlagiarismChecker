@@ -27,4 +27,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="account">Account</string>
     <string name="logout">Logout</string>
+    <string name="upload_file">Upload File</string>
+    <string name="docx_pdf_txt">.docx/.pdf/.txt</string>
+    <string name="check_plagiarism">Check Plagiarism</string>
+    <string name="checking">Checking:</string>
+    <string name="unique">Unique</string>
+    <string name="_1000">1000</string>
 </resources>

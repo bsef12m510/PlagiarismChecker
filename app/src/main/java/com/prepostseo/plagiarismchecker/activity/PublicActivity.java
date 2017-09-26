@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -71,6 +72,7 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
         ft.setCustomAnimations(R.anim.slide_in_left,
                 R.anim.slide_out_right,R.anim.slide_in_left,
                 R.anim.slide_out_right);
+
         if (key == 1)
             ft.replace(R.id.fragmentContainer, new LoginFragment());
         else if (key == 2)
@@ -84,6 +86,17 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
         ft.addToBackStack(null);
         ft.commit();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //preventing default implementation previous to android.os.Build.VERSION_CODES.ECLAIR
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 
     @Override
     public void onLoginResponse(LoginResponse loginResponseData) {

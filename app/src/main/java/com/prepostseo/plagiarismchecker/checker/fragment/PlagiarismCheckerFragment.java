@@ -14,12 +14,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.TextViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itextpdf.text.pdf.PdfReader;
@@ -75,6 +77,7 @@ public class PlagiarismCheckerFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private String key = "";
     private ProgressDialog pd;
+    private TextView apiProgressTextView,uniquePerTextView,plagPerTextView;
 
 
     public PlagiarismCheckerFragment() {
@@ -114,6 +117,10 @@ public class PlagiarismCheckerFragment extends Fragment {
         uploadButton = (Button) contentView.findViewById(R.id.uploadFile);
         checkButton = (Button) contentView.findViewById(R.id.check);
         content = (EditText) contentView.findViewById(R.id.content);
+        apiProgressTextView=(TextView)contentView.findViewById(R.id.api_progress_text_view);
+        plagPerTextView=(TextView)contentView.findViewById(R.id.plag_perc_text_view);
+        uniquePerTextView=(TextView)contentView.findViewById(R.id.unique_perc_text_view);
+
         pd = new ProgressDialog(getActivity());
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +171,6 @@ public class PlagiarismCheckerFragment extends Fragment {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{permission}, PERMISSIONS_REQUEST_CODE);
             }
         } else {
-//            showFileChooser();
             openFilePicker();
         }
     }
@@ -231,7 +237,6 @@ public class PlagiarismCheckerFragment extends Fragment {
             PdfReader reader = new PdfReader(filePath);
             int n = reader.getNumberOfPages();
             String str = PdfTextExtractor.getTextFromPage(reader, 1); //Extracting the content from a particular page.
-//            System.out.println(str);
             content.setText(str);
             reader.close();
         } catch (Exception e) {
@@ -243,11 +248,8 @@ public class PlagiarismCheckerFragment extends Fragment {
     private String readFromTextFile(String filePath) {
 
         String ret = "";
-
         try {
-//            FileInputStream fis = new FileInputStream(new File(filePath));
             InputStream inputStream = new FileInputStream(new File(filePath));
-
             if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -257,9 +259,9 @@ public class PlagiarismCheckerFragment extends Fragment {
                 while ((receiveString = bufferedReader.readLine()) != null) {
                     stringBuilder.append(receiveString);
                 }
-
                 inputStream.close();
                 ret = stringBuilder.toString();
+                content.setText(ret);
             }
         } catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
@@ -289,7 +291,7 @@ public class PlagiarismCheckerFragment extends Fragment {
 
                     String IMAGE_DIR_NAME = "images";
 
-                    String baseURL = getActivity().getDir(IMAGE_DIR_NAME, Context.MODE_WORLD_READABLE).toURL().toString();
+                    String baseURL = getActivity().getDir(IMAGE_DIR_NAME, Context.MODE_PRIVATE).toURL().toString();
                     System.out.println(baseURL);
 
                     ConversionImageHandler conversionImageHandler = new AndroidFileConversionImageHandler(IMAGE_DIR_NAME,
@@ -331,12 +333,16 @@ public class PlagiarismCheckerFragment extends Fragment {
 
         Call<PlagiarismResponse> call = plagService.checkPlagiarism(keyParam, dataParam);
         pd.show();
+
+        apiProgressTextView.setText("0%");
+        uniquePerTextView.setText("0%");
+        plagPerTextView.setText("0%");
         call.enqueue(new Callback<PlagiarismResponse>() {
             @Override
             public void onResponse(Call<PlagiarismResponse> call, Response<PlagiarismResponse> response) {
                 pd.hide();
                 if(response != null){
-                    Toast.makeText(getActivity(),"Plagiarism : " + response.body().getPlagPercent().toString() + " Uniqueness : " + response.body().getUniquePercent().toString(),Toast.LENGTH_SHORT).show();
+                    updateResult(response);
                 }
             }
 
@@ -347,6 +353,13 @@ public class PlagiarismCheckerFragment extends Fragment {
                 pd.hide();
             }
         });
+    }
+    private void updateResult( Response<PlagiarismResponse> response)
+    {
+        apiProgressTextView.setText("100%");
+        uniquePerTextView.setText( response.body().getUniquePercent().intValue()+"%");
+        plagPerTextView.setText(response.body().getPlagPercent().intValue()+"%");
+        Toast.makeText(getActivity(),"Plagiarism : " + response.body().getPlagPercent().toString() + " Uniqueness : " + response.body().getUniquePercent().toString(),Toast.LENGTH_SHORT).show();
     }
 
     /**
