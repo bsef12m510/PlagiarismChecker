@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "474320465644",
+    "project_id": "firebase-plagiarism-checker"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474320465644:android:f96b7d2db41cca85",
+        "android_client_info": {
+          "package_name": "com.prepostseo.plagiarismchecker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474320465644-337giurvfbv48vgo05im0q5bo32g3ltk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prepostseo.plagiarismchecker",
+            "certificate_hash": "4fce5b37418427cd969af3c66367831cbf6187af"
+          }
+        },
+        {
+          "client_id": "474320465644-ua6k9cis9brsbk0jlk9vn539obloebmp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT_M8v8pR3lc2sq8S5LsvOQjggntl8o28"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -123,13 +123,19 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
 
 
     @Override
-    public void onRegisterResponse(RegisterResponse registerResponse) {
-        if (registerResponse.getApiKey() != null)
+    public void onRegisterResponse(RegisterResponse registerResponse, boolean isGoogleSignin) {
+        if (registerResponse.getApiKey() != null) {
             storeApiKey(registerResponse.getApiKey());
-        if (registerResponse.getUserId() != null) {
-            user_id = registerResponse.getUserId();
-            Toast.makeText(PublicActivity.this, "User id : " + registerResponse.getUserId().toString(), Toast.LENGTH_SHORT).show();
-            displayFragment(3);
+            if (registerResponse.getUserId() != null) {
+                user_id = registerResponse.getUserId();
+                Toast.makeText(PublicActivity.this, "User id : " + registerResponse.getUserId().toString(), Toast.LENGTH_SHORT).show();
+            }
+            if (!isGoogleSignin)
+                displayFragment(3);
+            else
+                startDrawerActivity();
+        }else{
+            Toast.makeText(PublicActivity.this, "Unable to register. Please try again later.", Toast.LENGTH_SHORT).show();
         }
     }
 

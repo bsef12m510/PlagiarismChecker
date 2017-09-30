@@ -72,7 +72,7 @@ public class VerifyFragment extends Fragment {
         initialize();
         setClickListeners();
         pd = new ProgressDialog(getActivity());
-
+        pd.setCanceledOnTouchOutside(false);
     }
 
     public void initialize(){

@@ -60,8 +60,8 @@ public class LoginFragment extends Fragment {
         initialize(contentView);
         setClickListeners();
         pd = new ProgressDialog(getActivity());
-
-    }
+        pd.setCanceledOnTouchOutside(false);
+ }
 
     public void initialize(View contentView){
         registerButton = (TextView) contentView.findViewById(R.id.registerTextView);
@@ -119,31 +119,37 @@ public class LoginFragment extends Fragment {
     }
 
     public void callLoginService() {
-        LoginService loginService =
-                ApiClient.getClient().create(LoginService.class);
-        RequestBody emailParam = RequestBody.create(MediaType.parse("text/plain"), email.getText().toString());
-        RequestBody passParam = RequestBody.create(MediaType.parse("text/plain"), password.getText().toString());
-        Call<LoginResponse> call = loginService.login(emailParam, passParam);
-        pd.show();
-        call.enqueue(new Callback<LoginResponse>() {
-            @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                pd.hide();
-                if (response != null) {
-                    loginResponseData = (LoginResponse) response.body();
+        if(email.getText().toString().trim().equalsIgnoreCase("")){
+            email.setError("Username cannot be empty.");
+        }else if(password.getText().toString().trim().equalsIgnoreCase("")){
+            password.setError("Password cannot be empty");
+        }else {
+            LoginService loginService =
+                    ApiClient.getClient().create(LoginService.class);
+            RequestBody emailParam = RequestBody.create(MediaType.parse("text/plain"), email.getText().toString());
+            RequestBody passParam = RequestBody.create(MediaType.parse("text/plain"), password.getText().toString());
+            Call<LoginResponse> call = loginService.login(emailParam, passParam);
+            pd.show();
+            call.enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    pd.hide();
+                    if (response != null) {
+                        loginResponseData = (LoginResponse) response.body();
 
-                    onSuccessfulLogin(loginResponseData);
+                        onSuccessfulLogin(loginResponseData);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                // Log error here since request failed
-                Log.e("failure", "failure");
-                pd.hide();
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    // Log error here since request failed
+                    Log.e("failure", "failure");
+                    pd.hide();
 
-            }
-        });
+                }
+            });
+        }
     }
 
 

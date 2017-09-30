@@ -108,6 +108,13 @@ public class PlagiarismCheckerFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(content != null)
+            content.setError(null);
+    }
+
     public void getKey(){
         SharedPreferences shared = getActivity().getSharedPreferences( "com.prepostseo.plagiarismchecker", Context.MODE_PRIVATE);
         key = shared.getString("api_key", "");
@@ -122,6 +129,7 @@ public class PlagiarismCheckerFragment extends Fragment {
         uniquePerTextView=(TextView)contentView.findViewById(R.id.unique_perc_text_view);
 
         pd = new ProgressDialog(getActivity());
+        pd.setCanceledOnTouchOutside(false);
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,7 +139,14 @@ public class PlagiarismCheckerFragment extends Fragment {
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callPlagiarismService(content.getText().toString());
+                if(content.getText().toString().trim().equalsIgnoreCase(""))
+                    content.setError("Cannot be empty.");
+                else if(content.getText().toString().length() > 5000)
+                    content.setError("Word limit exceeded.");
+                else {
+                    content.setError(null);
+                    callPlagiarismService(content.getText().toString());
+                }
             }
         });
     }
@@ -211,13 +226,14 @@ public class PlagiarismCheckerFragment extends Fragment {
             docPaths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS));
             if (docPaths.size() > 0) {
                 Toast.makeText(getActivity(), docPaths.get(0), Toast.LENGTH_SHORT).show();
+                content.setText("");
                 ext = getFileType(docPaths.get(0));
                 if ("pdf".equalsIgnoreCase(ext))
                     extractTextFromPdf(docPaths.get(0));
                 else if ("txt".equalsIgnoreCase(ext))
                     readFromTextFile(docPaths.get(0));
                 else
-                    doc4jx(docPaths.get(0));
+                    docx4j(docPaths.get(0));
             }
         }
     }
@@ -272,9 +288,9 @@ public class PlagiarismCheckerFragment extends Fragment {
         return ret;
     }
 
-    public void doc4jx(final String fileName) {
+    public void docx4j(final String fileName) {
         final ProgressDialog pd = new ProgressDialog(getActivity());
-
+        pd.setCanceledOnTouchOutside(false);
         pd.show();
 
 
