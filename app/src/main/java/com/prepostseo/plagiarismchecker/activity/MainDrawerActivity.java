@@ -21,12 +21,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.prepostseo.plagiarismchecker.R;
+import com.prepostseo.plagiarismchecker.accountDetails.fragment.AccountInfoFragment;
 import com.prepostseo.plagiarismchecker.checker.fragment.PlagiarismCheckerFragment;
 
 public class MainDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PlagiarismCheckerFragment.OnFragmentInteractionListener {
 
     private static String TAG_PLAG = "plagFrag";
+    private static String TAG_ACCOUNT_INFO = "infoFrag";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +93,8 @@ public class MainDrawerActivity extends AppCompatActivity
             replaceFragment(fragment,TAG_PLAG);
             // Handle the camera action
         } else if (id == R.id.nav_account) {
-
+            Fragment fragment = new AccountInfoFragment();
+            replaceFragment(fragment,TAG_ACCOUNT_INFO);
         } else if (id == R.id.nav_logout) {
             logout();
         }
