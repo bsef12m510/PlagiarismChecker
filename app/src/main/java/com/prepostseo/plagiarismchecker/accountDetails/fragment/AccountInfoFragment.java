@@ -17,8 +17,6 @@ import com.prepostseo.plagiarismchecker.Login.response.LoginResponse;
 import com.prepostseo.plagiarismchecker.R;
 import com.prepostseo.plagiarismchecker.accountDetails.restInterface.AccountInfoService;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
-import com.prepostseo.plagiarismchecker.checker.response.PlagiarismResponse;
-import com.prepostseo.plagiarismchecker.checker.restInterface.PlagiarismService;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -33,18 +31,16 @@ public class AccountInfoFragment extends Fragment {
     private String key = "";
     private ProgressDialog pd;
     private View contentView;
-    private TextView username;
-
+    private TextView usernameTextView, apikeyTopTextView, quriesLimitTopTextView, quriesUsedTopTextView, emailTextView,apikeyBottomTextView, quriesLimitBottomTextView, quriesUsedBottomTextView,membershipTextView;
     public AccountInfoFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        contentView = inflater.inflate(R.layout.fragment_account_info, container, false);
+        contentView = inflater.inflate(R.layout.fragment_account, container, false);
         return contentView;
     }
 
@@ -72,7 +68,15 @@ public class AccountInfoFragment extends Fragment {
     public void initialize(){
         pd = new ProgressDialog(getActivity());
         pd.setCanceledOnTouchOutside(false);
-        username = (TextView) contentView.findViewById(R.id.username);
+        usernameTextView = (TextView) contentView.findViewById(R.id.username);
+        apikeyTopTextView = (TextView) contentView.findViewById(R.id.api_key);
+        quriesLimitTopTextView = (TextView) contentView.findViewById(R.id.query_limit);
+        quriesUsedTopTextView = (TextView) contentView.findViewById(R.id.query_used);
+        emailTextView = (TextView) contentView.findViewById(R.id.email);
+        apikeyBottomTextView = (TextView) contentView.findViewById(R.id.api_key_double);
+        quriesLimitBottomTextView = (TextView) contentView.findViewById(R.id.query_limit_double);
+        quriesUsedBottomTextView = (TextView) contentView.findViewById(R.id.query_used_double);
+        membershipTextView = (TextView) contentView.findViewById(R.id.membership);
     }
 
     public void callAccountInfoService(){
@@ -90,7 +94,7 @@ public class AccountInfoFragment extends Fragment {
                 pd.hide();
                 if(response != null){
                   //set UI
-                    username.setText(response.body().getUser_name());
+                    assignValues(response.body());
                 }
             }
 
@@ -102,4 +106,23 @@ public class AccountInfoFragment extends Fragment {
             }
         });
     }
+    private void assignValues(LoginResponse response)
+    {
+        if(response!=null) {
+            usernameTextView.setText(response.getUser_name());
+            apikeyTopTextView.setText(response.getApi_key());
+            apikeyBottomTextView.setText(response.getApi_key());
+            quriesLimitTopTextView.setText(response.getQueries_limit());
+            quriesLimitBottomTextView.setText(response.getQueries_limit());
+            quriesUsedTopTextView.setText(response.getQueries_used());
+            quriesUsedBottomTextView.setText(Integer.parseInt(response.getQueries_limit()) + " (" + Integer.toString ((Integer.parseInt(response.getQueries_used())/Integer.parseInt(response.getQueries_limit()))/100) +  "% used )" );
+            emailTextView.setText(response.getUser_email());
+            String membership= "Normal";
+            if(response.getPremium()=="1") {
+                membership="Premium";
+            }
+            membershipTextView.setText(membership);
+        }
+    }
+
 }

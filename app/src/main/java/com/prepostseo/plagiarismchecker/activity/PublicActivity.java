@@ -102,7 +102,7 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
     public void onLoginResponse(LoginResponse loginResponseData) {
         if(loginResponseData != null && loginResponseData.getVerified().equalsIgnoreCase("1")) {
             if(loginResponseData.getApi_key()!=null)
-                storeApiKey(loginResponseData.getApi_key());
+                storeUserData(loginResponseData);
             Toast.makeText(PublicActivity.this, "Login with user : " + loginResponseData.getUser_email(), Toast.LENGTH_SHORT).show();
             startDrawerActivity();
         }else{
@@ -125,10 +125,10 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
     @Override
     public void onRegisterResponse(RegisterResponse registerResponse, boolean isGoogleSignin) {
         if (registerResponse.getApiKey() != null) {
-            storeApiKey(registerResponse.getApiKey());
             if (registerResponse.getUserId() != null) {
                 user_id = registerResponse.getUserId();
-                Toast.makeText(PublicActivity.this, "User id : " + registerResponse.getUserId().toString(), Toast.LENGTH_SHORT).show();
+                displayFragment(1);
+               // Toast.makeText(PublicActivity.this, "User id : " + registerResponse.getUserId().toString(), Toast.LENGTH_SHORT).show();
             }
             if (!isGoogleSignin)
                 displayFragment(3);
@@ -147,11 +147,13 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
         }
     }
 
-    public void storeApiKey(String api_key) {
+    public void storeUserData(LoginResponse response) {
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.prepostseo.plagiarismchecker", Context.MODE_PRIVATE);
 
-        prefs.edit().putString("api_key", api_key).apply();
+        prefs.edit().putString("api_key", response.getApi_key()).apply();
+        prefs.edit().putString("email", response.getUser_email() ).apply();
+        prefs.edit().putString("username", response.getUser_name() ).apply();
     }
 
     public void startDrawerActivity(){

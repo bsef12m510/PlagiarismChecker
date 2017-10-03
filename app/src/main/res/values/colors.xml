@@ -8,6 +8,9 @@
     <item name="buttonColor" type="color">#28c63b</item>aaa
     <item name="buttonGray" type="color">#aaa</item>
     <item name="buttonUploadFile" type="color">#2989c6</item>
+    <item name="bgQueryLimitColor" type="color">#f6f6f6</item>
+    <item name="bgQueryUsedColor" type="color">#f2f2f2</item>
+    <item name="bgAccountHeaderColor" type="color">#f8f8f8</item>
 
 
 

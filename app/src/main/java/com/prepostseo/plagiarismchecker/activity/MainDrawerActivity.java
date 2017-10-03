@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.TextViewCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.prepostseo.plagiarismchecker.R;
 import com.prepostseo.plagiarismchecker.accountDetails.fragment.AccountInfoFragment;
@@ -29,6 +31,7 @@ public class MainDrawerActivity extends AppCompatActivity
 
     private static String TAG_PLAG = "plagFrag";
     private static String TAG_ACCOUNT_INFO = "infoFrag";
+    private TextView userNameTextView,emailTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +48,19 @@ public class MainDrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        View  headerView=(View)navigationView.getHeaderView(0);
+        userNameTextView=(TextView)headerView.findViewById(R.id.header_username);
+        emailTextView=(TextView)headerView.findViewById(R.id.header_email);
+        getSavedHeaderData();
         replaceFragment(new PlagiarismCheckerFragment(),TAG_PLAG);
     }
 
+    private void getSavedHeaderData()
+    {
+        SharedPreferences shared = getSharedPreferences( "com.prepostseo.plagiarismchecker", Context.MODE_PRIVATE);
+        userNameTextView.setText(shared.getString("username", ""));
+        emailTextView.setText(shared.getString("email",""));
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

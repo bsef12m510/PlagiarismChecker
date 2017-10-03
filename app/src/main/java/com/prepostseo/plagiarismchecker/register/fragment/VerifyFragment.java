@@ -17,7 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.chaos.view.PinView;
+import com.dpizarro.pinview.library.PinView;
+import com.dpizarro.pinview.library.PinViewSettings;
 import com.prepostseo.plagiarismchecker.R;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
 import com.prepostseo.plagiarismchecker.register.response.RegisterResponse;
@@ -44,6 +45,7 @@ public class VerifyFragment extends Fragment {
     private View contentView;
     private ProgressDialog pd;
     private boolean isButtonEnabled =false;
+    private String [] myTitles={"#","#","#","#"};
 
     public VerifyFragment() {
         // Required empty public constructor
@@ -76,30 +78,18 @@ public class VerifyFragment extends Fragment {
     }
 
     public void initialize(){
-        verification_code = (PinView)contentView.findViewById(R.id.code);
-        verification_code.setAnimationEnable(false);
-        verification_code.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(s.length()== 4) {
-                    isButtonEnabled=true;
-                    verifyButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                }else {
-                    isButtonEnabled = false;
-                    verifyButton.setBackgroundColor(getResources().getColor(R.color.buttonGray));
-                }
-            }
-        });
+        verification_code = (PinView)contentView.findViewById(R.id.pinView);
+        PinViewSettings pinViewSettings = new PinViewSettings.Builder()
+                .withPinTitles(myTitles)
+                .withMaskPassword(false)
+                .withDeleteOnClick(true)
+                .withKeyboardMandatory(false)
+                .withNumberPinBoxes(4)
+                .withNativePinBox(false)
+                .withColorTextTitles(getResources().getColor(R.color.buttonGray))
+                .withColorTextPinBox(getResources().getColor(R.color.colorAccent))
+                .build();
+        verification_code.setSettings(pinViewSettings);
         verifyButton = (Button)contentView.findViewById(R.id.verifyButton);
     }
 
@@ -108,7 +98,7 @@ public class VerifyFragment extends Fragment {
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isButtonEnabled)
+                if(verification_code.getPinResults().replaceAll(" ","").length() == 4)
                     callVerifyService();
             }
         });
@@ -140,7 +130,7 @@ public class VerifyFragment extends Fragment {
 
     public void callVerifyService(){
         RegisterService registerService = ApiClient.getClient().create(RegisterService.class);
-        RequestBody codeParam = RequestBody.create(MediaType.parse("text/plain"), verification_code.getText().toString());
+        RequestBody codeParam = RequestBody.create(MediaType.parse("text/plain"), verification_code.getPinResults().toString());
         RequestBody userIdParam = RequestBody.create(MediaType.parse("text/plain"),user_id);
 
         Call<RegisterResponse> call = registerService.verify(codeParam, userIdParam);

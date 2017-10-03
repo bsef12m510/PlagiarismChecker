@@ -57,34 +57,11 @@
                         android:textAlignment="center"
                         android:textSize = "20sp" />
 
-                    <!--<EditText-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop = "10dp"-->
-                        <!--android:layout_marginBottom = "10dp"-->
-                        <!--android:inputType="textPassword"-->
-                        <!--android:id = "@+id/code"-->
-                        <!--android:hint = "Enter code"-->
-                        <!--android:focusable = "true"-->
-                        <!--android:ems="10"-->
-                        <!--style="@style/EditText" />-->
-                    <com.chaos.view.PinView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id = "@+id/code"
-                        android:inputType="number"
-                        android:padding="5dp"
-                        android:textColorHint="@android:color/darker_gray"
-                        android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
-                        app:borderWidth="1dp"
-                        app:borderColor="@color/colorPrimaryDark"
-                        app:itemCount="4"
-                        app:itemSize="48dp"
-                        app:itemSpacing="4dp"
-                        app:itemRadius="4dp"
-                        style="@style/PinWidget.PinView" />
+                    <com.dpizarro.pinview.library.PinView
+                        android:id="@+id/pinView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
 
                     <Button
                         android:layout_width="match_parent"
@@ -93,7 +70,7 @@
                         android:layout_marginBottom = "10dp"
                         android:text="@string/confirm"
                         android:id="@+id/verifyButton"
-                        android:background="@color/buttonGray"
+                        android:background="@color/colorAccent"
                         style="@style/Button" />
                 </LinearLayout>
 
@@ -103,66 +80,6 @@
 
 </ScrollView>
 
-
-
-
-
-
-
-
-
-
-
-    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--tools:context="com.prepostseo.plagiarismchecker.Login.fragment.LoginFragment"-->
-  <!--&gt;-->
-
-    <!--<TextView android:text = "Login" android:layout_width="wrap_content"-->
-        <!--android:layout_height = "wrap_content"-->
-        <!--android:id = "@+id/textview"-->
-        <!--android:textSize = "35dp"-->
-        <!--android:layout_alignParentTop = "true"-->
-        <!--android:layout_centerHorizontal = "true" />-->
-
-    <!--<TextView-->
-        <!--android:layout_width = "wrap_content"-->
-        <!--android:layout_height = "wrap_content"-->
-        <!--android:text = "Tutorials point"-->
-        <!--android:id = "@+id/textView"-->
-        <!--android:layout_below = "@+id/textview"-->
-        <!--android:layout_centerHorizontal = "true"-->
-        <!--android:textColor = "#ff7aff24"-->
-        <!--android:textSize = "35dp" />-->
-
-    <!--<EditText-->
-        <!--android:layout_width = "wrap_content"-->
-        <!--android:layout_height = "wrap_content"-->
-        <!--android:id = "@+id/code"-->
-        <!--android:hint = "Enter code"-->
-        <!--android:focusable = "true"-->
-        <!--android:textColorHighlight = "#ff7eff15"-->
-        <!--android:textColorHint = "#ffff25e6"-->
-        <!--android:layout_marginTop = "46dp"-->
-        <!--android:layout_below = "@+id/textView"-->
-        <!--android:layout_alignParentLeft = "true"-->
-        <!--android:layout_alignParentStart = "true"-->
-        <!--android:layout_alignParentRight = "true"-->
-        <!--android:layout_alignParentEnd = "true" />-->
-
-
-
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Verfiy"-->
-        <!--android:id="@+id/verifyButton"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_toRightOf="@+id/textview"-->
-        <!--android:layout_toEndOf="@+id/textview" />-->
-
-<!--</RelativeLayout>-->
 
 
 
