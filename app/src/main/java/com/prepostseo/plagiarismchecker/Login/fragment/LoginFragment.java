@@ -2,10 +2,13 @@ package com.prepostseo.plagiarismchecker.Login.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +16,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.prepostseo.plagiarismchecker.Login.response.LoginResponse;
 import com.prepostseo.plagiarismchecker.Login.restInterface.LoginService;
 import com.prepostseo.plagiarismchecker.R;
@@ -64,6 +70,7 @@ public class LoginFragment extends Fragment {
  }
 
     public void initialize(View contentView){
+
         registerButton = (TextView) contentView.findViewById(R.id.registerTextView);
         underLineTetView(registerButton);
         loginButton = (Button)contentView.findViewById(R.id.loginButton);
@@ -90,6 +97,7 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
                 callLoginService();
             }
         });
@@ -151,7 +159,6 @@ public class LoginFragment extends Fragment {
             });
         }
     }
-
 
     /**
      * This interface must be implemented by activities that contain this

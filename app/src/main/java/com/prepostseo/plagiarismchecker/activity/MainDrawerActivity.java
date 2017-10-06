@@ -25,10 +25,12 @@ import android.widget.TextView;
 import com.prepostseo.plagiarismchecker.R;
 import com.prepostseo.plagiarismchecker.accountDetails.fragment.AccountInfoFragment;
 import com.prepostseo.plagiarismchecker.checker.fragment.PlagiarismCheckerFragment;
+import com.prepostseo.plagiarismchecker.plans.fragment.PlansFragment;
 
 public class MainDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PlagiarismCheckerFragment.OnFragmentInteractionListener {
 
+    private boolean fromPlagFragment = false;
     private static String TAG_PLAG = "plagFrag";
     private static String TAG_ACCOUNT_INFO = "infoFrag";
     private TextView userNameTextView,emailTextView;
@@ -107,6 +109,9 @@ public class MainDrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_account) {
             Fragment fragment = new AccountInfoFragment();
             replaceFragment(fragment,TAG_ACCOUNT_INFO);
+        }else if (id == R.id.nav_plans) {
+            Fragment fragment = new PlansFragment();
+            replaceFragment(fragment, "plansFragment");
         } else if (id == R.id.nav_logout) {
             logout();
         }
@@ -134,6 +139,7 @@ public class MainDrawerActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+        fromPlagFragment = true;
     }
     void replaceFragment(Fragment fragment,String TAG) {
         // Insert the fragment by replacing any existing fragment
@@ -153,7 +159,14 @@ public class MainDrawerActivity extends AppCompatActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Fragment fragment = getFragmentManager().findFragmentByTag("plagFrag");
+
+        Fragment fragment;
+        if(requestCode == 234) {
+            fragment = getFragmentManager().findFragmentByTag("plagFrag");
+        }else{
+            fragment = getFragmentManager().findFragmentByTag("plansFragment");
+        }
         fragment.onActivityResult(requestCode, resultCode, data);
+
     }
 }
