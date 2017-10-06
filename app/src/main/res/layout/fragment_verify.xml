@@ -70,6 +70,8 @@
                         android:layout_marginBottom = "10dp"
                         android:text="@string/confirm"
                         android:id="@+id/verifyButton"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:background="@color/colorAccent"
                         style="@style/Button" />
                 </LinearLayout>

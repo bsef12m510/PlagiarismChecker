@@ -188,6 +188,7 @@
                     android:textColor="@drawable/tab_white"
                     android:layout_gravity="end|center_vertical"
                     android:textAllCaps="false"
+                    android:layout_marginRight="5dp"
                     android:text="+ add more Queries"/>
             </LinearLayout>
 

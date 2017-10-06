@@ -8,31 +8,41 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.TextViewCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.itextpdf.awt.geom.CubicCurve2D;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.OnClickListener;
+import com.orhanobut.dialogplus.ViewHolder;
 import com.prepostseo.plagiarismchecker.R;
-import com.prepostseo.plagiarismchecker.activity.MainDrawerActivity;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
+import com.prepostseo.plagiarismchecker.checker.response.PlagiarismDetail;
 import com.prepostseo.plagiarismchecker.checker.response.PlagiarismResponse;
 import com.prepostseo.plagiarismchecker.checker.restInterface.PlagiarismService;
-import com.prepostseo.plagiarismchecker.register.response.RegisterResponse;
-import com.prepostseo.plagiarismchecker.register.restInterface.RegisterService;
 
 import org.apache.commons.io.FilenameUtils;
 import org.docx4j.XmlUtils;
@@ -51,6 +61,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
@@ -59,6 +70,8 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -78,6 +91,9 @@ public class PlagiarismCheckerFragment extends Fragment {
     private String key = "";
     private ProgressDialog pd;
     private TextView apiProgressTextView,uniquePerTextView,plagPerTextView;
+    private DialogPlus customDialogBox;
+    private ScrollView dialogueBoxView;
+    private TextView wordsLimit,currentwords;
 
 
     public PlagiarismCheckerFragment() {
@@ -103,9 +119,6 @@ public class PlagiarismCheckerFragment extends Fragment {
         initialize();
         getKey();
 
-//        setClickListeners();
-//        pd = new ProgressDialog(getActivity());
-
     }
 
     @Override
@@ -116,7 +129,7 @@ public class PlagiarismCheckerFragment extends Fragment {
     }
 
     public void getKey(){
-        SharedPreferences shared = getActivity().getSharedPreferences( "com.prepostseo.plagiarismchecker", Context.MODE_PRIVATE);
+        SharedPreferences shared = getActivity().getSharedPreferences( "com.prepostseo.plagiarismchecker", MODE_PRIVATE);
         key = shared.getString("api_key", "");
     }
 
@@ -125,8 +138,11 @@ public class PlagiarismCheckerFragment extends Fragment {
         checkButton = (Button) contentView.findViewById(R.id.check);
         content = (EditText) contentView.findViewById(R.id.content);
         apiProgressTextView=(TextView)contentView.findViewById(R.id.api_progress_text_view);
-        plagPerTextView=(TextView)contentView.findViewById(R.id.plag_perc_text_view);
-        uniquePerTextView=(TextView)contentView.findViewById(R.id.unique_perc_text_view);
+        wordsLimit=(TextView)contentView.findViewById(R.id.limit_number);
+        currentwords=(TextView)contentView.findViewById(R.id.current_words);
+        wordsLimit.setText( Integer.toString( getWordsLimit()));
+
+        inflateDialogBoxViewLayout();
 
         pd = new ProgressDialog(getActivity());
         pd.setCanceledOnTouchOutside(false);
@@ -149,6 +165,24 @@ public class PlagiarismCheckerFragment extends Fragment {
                 }
             }
         });
+        content.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                StringTokenizer st = new StringTokenizer(s.toString());
+                currentwords.setText(Integer.toString( st.countTokens()));
+            }
+        });
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -191,7 +225,7 @@ public class PlagiarismCheckerFragment extends Fragment {
     }
 
     private void showError() {
-        Toast.makeText(getActivity(), "Allow external storage reading", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), "Allow external storage reading", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -201,7 +235,6 @@ public class PlagiarismCheckerFragment extends Fragment {
             case PERMISSIONS_REQUEST_CODE: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    showFileChooser();
                     openFilePicker();
                 } else {
                     showError();
@@ -225,7 +258,7 @@ public class PlagiarismCheckerFragment extends Fragment {
             docPaths = new ArrayList<>();
             docPaths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS));
             if (docPaths.size() > 0) {
-                Toast.makeText(getActivity(), docPaths.get(0), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), docPaths.get(0), Toast.LENGTH_SHORT).show();
                 content.setText("");
                 ext = getFileType(docPaths.get(0));
                 if ("pdf".equalsIgnoreCase(ext))
@@ -307,7 +340,7 @@ public class PlagiarismCheckerFragment extends Fragment {
 
                     String IMAGE_DIR_NAME = "images";
 
-                    String baseURL = getActivity().getDir(IMAGE_DIR_NAME, Context.MODE_PRIVATE).toURL().toString();
+                    String baseURL = getActivity().getDir(IMAGE_DIR_NAME, MODE_PRIVATE).toURL().toString();
                     System.out.println(baseURL);
 
                     ConversionImageHandler conversionImageHandler = new AndroidFileConversionImageHandler(IMAGE_DIR_NAME,
@@ -339,6 +372,20 @@ public class PlagiarismCheckerFragment extends Fragment {
                 }
             }
         });
+    }
+    int getWordsLimit() {
+        try
+        {
+            SharedPreferences shared = getActivity().getSharedPreferences("com.prepostseo.plagiarismchecker", MODE_PRIVATE);
+            boolean isPremium = (shared.getBoolean("membership", false));
+            if (isPremium)
+                return getResources().getInteger(R.integer.premium);
+            else
+                return getResources().getInteger(R.integer.free);
+        }catch (Exception e)
+        {
+            return 0;
+        }
     }
 
     public void callPlagiarismService(String data){
@@ -372,10 +419,86 @@ public class PlagiarismCheckerFragment extends Fragment {
     }
     private void updateResult( Response<PlagiarismResponse> response)
     {
+
         apiProgressTextView.setText("100%");
         uniquePerTextView.setText( response.body().getUniquePercent().intValue()+"%");
         plagPerTextView.setText(response.body().getPlagPercent().intValue()+"%");
-        Toast.makeText(getActivity(),"Plagiarism : " + response.body().getPlagPercent().toString() + " Uniqueness : " + response.body().getUniquePercent().toString(),Toast.LENGTH_SHORT).show();
+        addDetailedItems(response.body().getDetails());
+
+
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        double height = size.y* 0.8;
+        customDialogBox = DialogPlus.newDialog(getActivity())
+        .setContentHolder(new ViewHolder(dialogueBoxView))
+        .setHeader(R.layout.result_header)
+        .setGravity(Gravity.CENTER)
+        .setCancelable(true)
+        .setInAnimation(R.anim.abc_fade_in)
+        .setOutAnimation(R.anim.abc_fade_out)
+        .setMargin(16, 16, 16, 16)
+        .setContentWidth(ViewGroup.LayoutParams.WRAP_CONTENT)  // or any custom width ie: 300
+        .setContentHeight((int)height)
+                .setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(DialogPlus dialog, View view) {
+                        onDialogBoxClicked(dialog,view);
+                    }
+                })
+        .create();
+        customDialogBox.show();
+
+
+        //Toast.makeText(getActivity(),"Plagiarism : " + response.body().getPlagPercent().toString() + " Uniqueness : " + response.body().getUniquePercent().toString(),Toast.LENGTH_SHORT).show();
+    }
+    void onDialogBoxClicked(DialogPlus dialog, View view)
+    {
+        if(view.getId()==R.id.cross_imgview)
+        {
+            if(customDialogBox.isShowing()) {
+                customDialogBox.dismiss();
+            }
+        }
+    }
+    void addDetailedItems(List<PlagiarismDetail> detailItems)
+    {
+        if(!detailItems.isEmpty())
+        {
+            for (PlagiarismDetail item:detailItems)
+            {
+                if(item!=null)
+                {
+                    if(item.getUnique())
+                    {
+                        LinearLayout itemLayout=inflateUniqueItemLayout();
+                        TextView textView=(TextView) itemLayout.findViewById(R.id.detail_text);
+                        textView.setText(item.getQuery());
+                        ((LinearLayout)dialogueBoxView.findViewById(R.id.detail_layout)).addView(itemLayout);
+                    }else
+                    {
+                        LinearLayout itemLayout=inflatePlagiarizedItemLayout();
+                        TextView textView=(TextView) itemLayout.findViewById(R.id.detail_text);
+                        textView.setText(item.getQuery());
+                        ((LinearLayout)dialogueBoxView.findViewById(R.id.detail_layout)).addView(itemLayout);
+                    }
+                }
+            }
+        }
+    }
+    void inflateDialogBoxViewLayout()
+    {
+        dialogueBoxView=(ScrollView) LayoutInflater.from(getActivity()).inflate(R.layout.result_view, null);
+        uniquePerTextView=(TextView)dialogueBoxView.findViewById(R.id.unique_perc_text_view);
+        plagPerTextView=(TextView)dialogueBoxView.findViewById(R.id.plag_perc_text_view);
+    }
+    LinearLayout inflatePlagiarizedItemLayout()
+    {
+       return (LinearLayout)LayoutInflater.from(getActivity()).inflate(R.layout.plagiarise_content_view, null);
+    }
+    LinearLayout inflateUniqueItemLayout()
+    {
+        return (LinearLayout)LayoutInflater.from(getActivity()).inflate(R.layout.unique_content_view, null);
     }
 
     /**

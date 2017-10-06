@@ -10,7 +10,7 @@ public class PlagiarismDetail {
     private String query;
     private Integer version;
     private String totalMatches;
-    private String unique;
+    private boolean unique;
     private List<String> matchedUrls = null;
 
     public String getQuery() {
@@ -37,11 +37,11 @@ public class PlagiarismDetail {
         this.totalMatches = totalMatches;
     }
 
-    public String getUnique() {
+    public boolean getUnique() {
         return unique;
     }
 
-    public void setUnique(String unique) {
+    public void setUnique(boolean unique) {
         this.unique = unique;
     }
 

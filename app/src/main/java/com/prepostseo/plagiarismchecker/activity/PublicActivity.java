@@ -154,6 +154,12 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
         prefs.edit().putString("api_key", response.getApi_key()).apply();
         prefs.edit().putString("email", response.getUser_email() ).apply();
         prefs.edit().putString("username", response.getUser_name() ).apply();
+        boolean isPremium=false;
+        if(response.getPremium()=="1")
+        {
+            isPremium=true;
+        }
+        prefs.edit().putBoolean("membership", isPremium ).apply();
     }
 
     public void startDrawerActivity(){

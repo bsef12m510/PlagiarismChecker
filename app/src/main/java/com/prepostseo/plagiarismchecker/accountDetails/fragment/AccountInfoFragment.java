@@ -117,7 +117,7 @@ public class AccountInfoFragment extends Fragment {
             quriesUsedTopTextView.setText(response.getQueries_used());
             quriesUsedBottomTextView.setText(Integer.parseInt(response.getQueries_limit()) + " (" + Integer.toString ((Integer.parseInt(response.getQueries_used())/Integer.parseInt(response.getQueries_limit()))/100) +  "% used )" );
             emailTextView.setText(response.getUser_email());
-            String membership= "Normal";
+            String membership= "Free";
             if(response.getPremium()=="1") {
                 membership="Premium";
             }
