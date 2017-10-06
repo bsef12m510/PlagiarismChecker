@@ -37,6 +37,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.OnClickListener;
+import com.orhanobut.dialogplus.OnDismissListener;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.prepostseo.plagiarismchecker.R;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
@@ -142,7 +143,6 @@ public class PlagiarismCheckerFragment extends Fragment {
         currentwords=(TextView)contentView.findViewById(R.id.current_words);
         wordsLimit.setText( Integer.toString( getWordsLimit()));
 
-        inflateDialogBoxViewLayout();
 
         pd = new ProgressDialog(getActivity());
         pd.setCanceledOnTouchOutside(false);
@@ -397,9 +397,7 @@ public class PlagiarismCheckerFragment extends Fragment {
         Call<PlagiarismResponse> call = plagService.checkPlagiarism(keyParam, dataParam);
         pd.show();
 
-        apiProgressTextView.setText("0%");
-        uniquePerTextView.setText("0%");
-        plagPerTextView.setText("0%");
+        inflateDialogBoxViewLayout();
         call.enqueue(new Callback<PlagiarismResponse>() {
             @Override
             public void onResponse(Call<PlagiarismResponse> call, Response<PlagiarismResponse> response) {
@@ -446,6 +444,12 @@ public class PlagiarismCheckerFragment extends Fragment {
                         onDialogBoxClicked(dialog,view);
                     }
                 })
+        .setOnDismissListener(new OnDismissListener() {
+            @Override
+            public void onDismiss(DialogPlus dialog) {
+                apiProgressTextView.setText("0%");
+            }
+        })
         .create();
         customDialogBox.show();
 
@@ -471,7 +475,7 @@ public class PlagiarismCheckerFragment extends Fragment {
                 {
                     if(item.getUnique())
                     {
-                        LinearLayout itemLayout=inflateUniqueItemLayout();
+                        LinearLayout itemLayout = inflateUniqueItemLayout();
                         TextView textView=(TextView) itemLayout.findViewById(R.id.detail_text);
                         textView.setText(item.getQuery());
                         ((LinearLayout)dialogueBoxView.findViewById(R.id.detail_layout)).addView(itemLayout);
