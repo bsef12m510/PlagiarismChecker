@@ -33,6 +33,8 @@ public class MainDrawerActivity extends AppCompatActivity
     private boolean fromPlagFragment = false;
     private static String TAG_PLAG = "plagFrag";
     private static String TAG_ACCOUNT_INFO = "infoFrag";
+    public static String TAG_PLANS = "plansFragment";
+
     private TextView userNameTextView,emailTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +113,7 @@ public class MainDrawerActivity extends AppCompatActivity
             replaceFragment(fragment,TAG_ACCOUNT_INFO);
         }else if (id == R.id.nav_plans) {
             Fragment fragment = new PlansFragment();
-            replaceFragment(fragment, "plansFragment");
+            replaceFragment(fragment, TAG_PLANS);
         } else if (id == R.id.nav_logout) {
             logout();
         }
@@ -141,7 +143,7 @@ public class MainDrawerActivity extends AppCompatActivity
 
         fromPlagFragment = true;
     }
-    void replaceFragment(Fragment fragment,String TAG) {
+    public void replaceFragment(Fragment fragment,String TAG) {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
