@@ -2,6 +2,7 @@ package com.prepostseo.plagiarismchecker.plans.fragment;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,15 @@ import android.widget.Toast;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.prepostseo.plagiarismchecker.R;
+import com.prepostseo.plagiarismchecker.api.ApiClient;
+import com.prepostseo.plagiarismchecker.plans.response.UpgradeUserResponse;
+import com.prepostseo.plagiarismchecker.plans.restinterface.UpgradeService;
+import com.prepostseo.plagiarismchecker.register.response.RegisterResponse;
+import com.prepostseo.plagiarismchecker.register.restInterface.RegisterService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -39,6 +50,7 @@ public class PlansFragment extends Fragment implements BillingProcessor.IBilling
     private static Button planButton, monthlyStandard,monthlyCompany,yearlyBasic,yearlyStandard,yearlyCompany;
     private View contentView;
     private static BillingProcessor bp;
+    private ProgressDialog pd;
     public PlansFragment() {
         // Required empty public constructor
     }
@@ -59,8 +71,11 @@ public class PlansFragment extends Fragment implements BillingProcessor.IBilling
         initialize();
     }
 
+
     public void initialize(){
 
+        pd = new ProgressDialog(getActivity());
+        pd.setCanceledOnTouchOutside(false);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter( ((AppCompatActivity)getActivity()).getSupportFragmentManager());
@@ -343,4 +358,54 @@ public class PlansFragment extends Fragment implements BillingProcessor.IBilling
 
 
     }
+    //this should be call when request is successful
+    void callUpgradeService(String apiKey,String packageName,String subscriptionId, String token)
+    {
+        UpgradeService upgradeUserService = ApiClient.getClient().create(UpgradeService.class);
+        Call<UpgradeUserResponse> call;
+
+
+        call = upgradeUserService.upgradeUser(apiKey, packageName, subscriptionId, token);
+        pd.show();
+        call.enqueue(new Callback<UpgradeUserResponse>() {
+            @Override
+            public void onResponse(Call<UpgradeUserResponse> call, Response<UpgradeUserResponse> response) {
+                pd.hide();
+                if (response != null) {
+                    onUpgradeResponse(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpgradeUserResponse> call, Throwable t) {
+                // Log error here since request failed
+                Log.e("failure", "failure");
+                pd.hide();
+            }
+        });
+    }
+    void onUpgradeResponse(UpgradeUserResponse response)
+    {
+        if(response!=null)
+        {
+            if(response.getResponse()==1) {
+                //successfull
+            }else
+            {
+                //unsuccessfull
+            }
+        }else
+        {
+            //unsuccessfull
+        }
+
+//         Response Type will be like this
+//           {"response":0,"error":"Invalid API Key Used"}
+//         examples 2:
+//         {"response":0,"error":"Unable to verify the requested parameters"}
+//            IF SUCCESSFULL
+//          {"response":1,"msg":"Your Account Upgraded"}
+
+    }
+
 }

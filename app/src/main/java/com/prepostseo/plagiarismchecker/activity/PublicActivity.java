@@ -132,8 +132,9 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
             }
             if (!isGoogleSignin)
                 displayFragment(3);
-            else
-                startDrawerActivity();
+            else {
+                displayFragment(1);
+            }
         }else{
             Toast.makeText(PublicActivity.this, "Unable to register. Please try again later.", Toast.LENGTH_SHORT).show();
         }
