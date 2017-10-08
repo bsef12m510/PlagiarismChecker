@@ -398,6 +398,13 @@ public class PlansFragment extends Fragment implements BillingProcessor.IBilling
         {
             //unsuccessfull
         }
+//        This is the URL for upgradation of user
+//        https://www.prepostseo.com/app/upgradeUser
+//        Parameters Required
+//        -- key
+//        -- packageName
+//        -- subscriptionId
+//        -- token
 
 //         Response Type will be like this
 //           {"response":0,"error":"Invalid API Key Used"}
@@ -405,7 +412,6 @@ public class PlansFragment extends Fragment implements BillingProcessor.IBilling
 //         {"response":0,"error":"Unable to verify the requested parameters"}
 //            IF SUCCESSFULL
 //          {"response":1,"msg":"Your Account Upgraded"}
-
     }
 
 }
