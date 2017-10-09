@@ -29,7 +29,8 @@ import com.anjlab.android.iab.v3.TransactionDetails;
 import com.prepostseo.plagiarismchecker.R;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
 import com.prepostseo.plagiarismchecker.plans.response.UpgradeUserResponse;
-import com.prepostseo.plagiarismchecker.plans.restinterface.UpgradeService;
+
+import com.prepostseo.plagiarismchecker.plans.restInterface.UpgradeService;
 import com.prepostseo.plagiarismchecker.register.response.RegisterResponse;
 import com.prepostseo.plagiarismchecker.register.restInterface.RegisterService;
 
@@ -321,10 +322,17 @@ public class PlansFragment extends Fragment implements BillingProcessor.IBilling
         super.onDestroy();
     }
 
+    public String getKey(){
+        SharedPreferences shared = getActivity().getSharedPreferences( "com.prepostseo.plagiarismchecker", MODE_PRIVATE);
+        return shared.getString("api_key", "");
+    }
+
+
     @Override
     public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
         Toast.makeText(getActivity(), details.toString(), Toast.LENGTH_LONG).show();
         bp.loadOwnedPurchasesFromGoogle();
+        callUpgradeService(getKey(),details.purchaseInfo.purchaseData.packageName,productId,details.purchaseInfo.purchaseData.purchaseToken);
     }
 
     @Override
@@ -390,12 +398,15 @@ public class PlansFragment extends Fragment implements BillingProcessor.IBilling
         {
             if(response.getResponse()==1) {
                 //successfull
+                Toast.makeText(getActivity(),"Your account upgraded",Toast.LENGTH_SHORT).show();
             }else
             {
                 //unsuccessfull
+                Toast.makeText(getActivity(),"Could not upgrade your account. Please try again later.",Toast.LENGTH_SHORT).show();
             }
         }else
         {
+            Toast.makeText(getActivity(),"Could not upgrade your account. Please try again later.",Toast.LENGTH_SHORT).show();
             //unsuccessfull
         }
 //        This is the URL for upgradation of user

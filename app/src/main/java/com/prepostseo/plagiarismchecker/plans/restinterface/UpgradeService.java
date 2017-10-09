@@ -1,7 +1,7 @@
-package com.prepostseo.plagiarismchecker.plans.restinterface;
+package com.prepostseo.plagiarismchecker.plans.restInterface;
 
 import com.prepostseo.plagiarismchecker.plans.response.UpgradeUserResponse;
-import com.prepostseo.plagiarismchecker.plans.restinterface.UpgradeService;
+
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
