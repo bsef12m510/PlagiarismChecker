@@ -9,9 +9,6 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 
-/**
- * Created by zeeshan on 9/24/2017.
- */
 public interface PlagiarismService {
     @Multipart
     @POST("apis/checkPlag")

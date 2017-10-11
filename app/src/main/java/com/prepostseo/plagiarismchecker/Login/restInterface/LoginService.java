@@ -1,8 +1,5 @@
 package com.prepostseo.plagiarismchecker.Login.restInterface;
 
-/**
- * Created by zeeshan on 9/15/2017.
- */
 import com.prepostseo.plagiarismchecker.Login.response.LoginResponse;
 
 import okhttp3.RequestBody;

@@ -2,16 +2,21 @@ package com.prepostseo.plagiarismchecker.checker.response;
 
 import java.util.List;
 
-/**
- * Created by zeeshan on 9/24/2017.
- */
 public class PlagiarismResponse {
     private Integer totalQueries;
+
     private Double plagPercent;
     private Double uniquePercent;
     private Object excludeURL;
     private List<PlagiarismDetail> details = null;
+    private boolean isQueriesFinished;
+    public boolean isQueriesFinished() {
+        return isQueriesFinished;
+    }
 
+    public void setQueriesFinished(boolean queriesFinished) {
+        isQueriesFinished = queriesFinished;
+    }
     public Integer getTotalQueries() {
         return totalQueries;
     }

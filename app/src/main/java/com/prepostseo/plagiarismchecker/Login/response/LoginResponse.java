@@ -1,8 +1,5 @@
 package com.prepostseo.plagiarismchecker.Login.response;
 
-/**
- * Created by zeeshan on 9/15/2017.
- */
 public class LoginResponse {
 
     private String user_id;

@@ -128,7 +128,6 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
             if (registerResponse.getUserId() != null) {
                 user_id = registerResponse.getUserId();
                 displayFragment(1);
-               // Toast.makeText(PublicActivity.this, "User id : " + registerResponse.getUserId().toString(), Toast.LENGTH_SHORT).show();
             }
             if (!isGoogleSignin)
                 displayFragment(3);
@@ -136,14 +135,14 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
                 displayFragment(1);
             }
         }else{
-            Toast.makeText(PublicActivity.this, "Unable to register. Please try again later.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PublicActivity.this, registerResponse.getError(), Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     public void onVerifyResponse(boolean isVerified) {
         if (isVerified) {
-            Toast.makeText(PublicActivity.this, "Verified", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PublicActivity.this, "Verified", Toast.LENGTH_LONG).show();
             startDrawerActivity();
         }
     }
@@ -156,9 +155,9 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
         prefs.edit().putString("email", response.getUser_email() ).apply();
         prefs.edit().putString("username", response.getUser_name() ).apply();
         boolean isPremium=false;
-        if(response.getPremium()=="1")
+        if(response.getPremium().equals("1"))
         {
-            isPremium=true;
+            isPremium = true;
         }
         prefs.edit().putBoolean("membership", isPremium ).apply();
     }

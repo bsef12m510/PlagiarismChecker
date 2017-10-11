@@ -55,8 +55,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/quries_limit"
+                    android:textColor="@color/colorBlack"
                     android:textStyle="bold"
-                    android:padding="5dp"
+                    android:padding="2dp"
                     android:textSize="15sp"
                     />
                 <TextView
@@ -65,7 +66,7 @@
                     android:text="0"
                     android:id="@+id/query_limit"
                     android:textStyle="normal"
-                    android:padding="5dp"
+                    android:padding="2dp"
                     android:textSize="15sp" />
             </LinearLayout>
             <LinearLayout
@@ -80,9 +81,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quries Used"
+                    android:text="@string/quries_used"
+                    android:textColor="@color/colorBlack"
                     android:textStyle="bold"
-                    android:padding="5dp"
+                    android:padding="2dp"
                     android:textSize="15sp"
                     />
                 <TextView
@@ -91,7 +93,7 @@
                     android:id="@+id/query_used"
                     android:text="0"
                     android:textStyle="normal"
-                    android:padding="5dp"
+                    android:padding="2dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -111,16 +113,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email"
-                    android:padding="5dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="5dp"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textSize="10sp"
-                    android:id="@+id/email"
-                    android:padding="5dp" />
+                    android:textSize="12sp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/email" />
                 <View
                     style="@style/Divider"
                     android:background="@color/bg_gray"
@@ -136,16 +142,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="API Key"
-                    android:padding="5dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="5dp"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textSize="10sp"
+                    android:textSize="12sp"
                     android:id="@+id/api_key_double"
-                    android:padding="5dp" />
+                    android:paddingTop="2dp"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="5dp" />
                 <View
                     style="@style/Divider"
                     android:background="@color/bg_gray"
@@ -169,16 +179,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Quries Limit"
-                        android:padding="5dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="5dp"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         android:id="@+id/query_limit_double"
-                        android:padding="5dp" />
+                        android:paddingTop="2dp"
+                        android:paddingBottom="7dp"
+                        android:paddingLeft="5dp" />
                 </LinearLayout>
                 <Button
                     android:layout_width="0dp"
@@ -208,7 +222,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Queries Used"
-                    android:padding="5dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="5dp"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"/>
                 <TextView
@@ -216,8 +232,10 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:id="@+id/query_used_double"
-                    android:textSize="10sp"
-                    android:padding="5dp" />
+                    android:textSize="12sp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="5dp" />
                 <View
                     style="@style/Divider"
                     android:background="@color/bg_gray"
@@ -233,8 +251,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Membership"
-                    android:padding="5dp"
-                    android:textSize="10sp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="5dp"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"/>
                 <TextView
@@ -242,12 +261,13 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:id="@+id/membership"
-                    android:textSize="10sp"
-                    android:padding="5dp" />
+                    android:textSize="12sp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="5dp" />
                 <View
                     style="@style/Divider"
-                    android:background="@color/bg_gray"
-                    >
+                    android:background="@color/bg_gray">
                 </View>
             </LinearLayout>
         </LinearLayout>

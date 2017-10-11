@@ -11,10 +11,8 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 
-/**
- * Created by zeeshan on 9/15/2017.
- */
-public interface RegisterService {
+public interface RegisterService
+{
     @FormUrlEncoded
     @POST("app/register")
     Call<RegisterResponse> register(@Field("name") String name, @Field("email") String email, @Field("pass") String pass, @Field("GoogleAuth") String googleAuth);

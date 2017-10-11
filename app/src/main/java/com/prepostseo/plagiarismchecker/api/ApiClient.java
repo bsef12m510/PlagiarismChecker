@@ -1,8 +1,5 @@
 package com.prepostseo.plagiarismchecker.api;
 
-/**
- * Created by zeeshan on 9/15/2017.
- */
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

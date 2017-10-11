@@ -2,15 +2,18 @@ package com.prepostseo.plagiarismchecker.checker.fragment;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 //import android.support.constraint.ConstraintLayout;
@@ -18,10 +21,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,6 +34,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.ScrollView;
+import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,10 +46,12 @@ import com.orhanobut.dialogplus.OnClickListener;
 import com.orhanobut.dialogplus.OnDismissListener;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.prepostseo.plagiarismchecker.R;
+import com.prepostseo.plagiarismchecker.activity.MainDrawerActivity;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
 import com.prepostseo.plagiarismchecker.checker.response.PlagiarismDetail;
 import com.prepostseo.plagiarismchecker.checker.response.PlagiarismResponse;
 import com.prepostseo.plagiarismchecker.checker.restInterface.PlagiarismService;
+import com.prepostseo.plagiarismchecker.plans.fragment.PlansFragment;
 
 import org.apache.commons.io.FilenameUtils;
 import org.docx4j.XmlUtils;
@@ -90,8 +98,9 @@ public class PlagiarismCheckerFragment extends Fragment {
     private View contentView;
     private OnFragmentInteractionListener mListener;
     private String key = "";
-    private ProgressDialog pd;
-    private TextView apiProgressTextView,uniquePerTextView,plagPerTextView;
+    private ProgressDialog pdReadingDocument;
+    private ProgressDialog pdChecking;
+    private TextView uniquePerTextView,plagPerTextView;
     private DialogPlus customDialogBox;
     private ScrollView dialogueBoxView;
     private TextView wordsLimit,currentwords;
@@ -138,14 +147,20 @@ public class PlagiarismCheckerFragment extends Fragment {
         uploadButton = (Button) contentView.findViewById(R.id.uploadFile);
         checkButton = (Button) contentView.findViewById(R.id.check);
         content = (EditText) contentView.findViewById(R.id.content);
-        apiProgressTextView=(TextView)contentView.findViewById(R.id.api_progress_text_view);
+        setEditTextProperties(content);
         wordsLimit=(TextView)contentView.findViewById(R.id.limit_number);
         currentwords=(TextView)contentView.findViewById(R.id.current_words);
         wordsLimit.setText( Integer.toString( getWordsLimit()));
 
 
-        pd = new ProgressDialog(getActivity());
-        pd.setCanceledOnTouchOutside(false);
+        pdReadingDocument = new ProgressDialog(getActivity());
+        pdReadingDocument.setMessage("Reading document");
+        pdReadingDocument.setCanceledOnTouchOutside(false);
+
+        pdChecking = new ProgressDialog(getActivity());
+        pdChecking.setMessage("Checking, please wait");
+        pdChecking.setCanceledOnTouchOutside(false);
+
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,10 +170,14 @@ public class PlagiarismCheckerFragment extends Fragment {
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                StringTokenizer st = new StringTokenizer(content.getText().toString());
+
                 if(content.getText().toString().trim().equalsIgnoreCase(""))
                     content.setError("Cannot be empty.");
-                else if(content.getText().toString().length() > 5000)
+                else if(st.countTokens() > getWordsLimit()){
                     content.setError("Word limit exceeded.");
+                    showWordsLimitDialogueBox();
+                }
                 else {
                     content.setError(null);
                     callPlagiarismService(content.getText().toString());
@@ -183,6 +202,55 @@ public class PlagiarismCheckerFragment extends Fragment {
             }
         });
 
+    }
+    void showWordsLimitDialogueBox()
+    {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_Light_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(getActivity());
+        }
+        builder.setTitle("Words limit exceeds")
+                .setMessage("Please upgrade your account to use more than "+ getResources().getInteger(R.integer.free)+" words. Do you want to upgrade?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        buyPlans();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+    public void buyPlans()
+    {
+        ((MainDrawerActivity)getActivity()).replaceFragment(new PlansFragment(),MainDrawerActivity.TAG_PLANS);
+        ((MainDrawerActivity)getActivity()).navigationView.setCheckedItem(R.id.nav_plans);
+    }
+    void setEditTextProperties(EditText content)
+    {
+        content.setScroller(new Scroller(getActivity()));
+        content.setVerticalScrollBarEnabled(true);
+        content.setMovementMethod(new ScrollingMovementMethod());
+        content.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (view.getId() ==R.id.content) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -245,10 +313,9 @@ public class PlagiarismCheckerFragment extends Fragment {
 
     private void openFilePicker() {
         FilePickerBuilder.getInstance().setMaxCount(1)
-                .setActivityTheme(R.style.AppTheme)
+                .setActivityTheme(R.style.Theme_AppCompat_Light)
                 .pickFile(getActivity());
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -322,56 +389,58 @@ public class PlagiarismCheckerFragment extends Fragment {
     }
 
     public void docx4j(final String fileName) {
-        final ProgressDialog pd = new ProgressDialog(getActivity());
-        pd.setCanceledOnTouchOutside(false);
-        pd.show();
 
+        pdReadingDocument.show();
+        try {
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    //TODO your background code
+                    try {
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                //TODO your background code
-                try {
+                        InputStream is = new FileInputStream(new File(fileName));
 
-                    InputStream is = new FileInputStream(new File(fileName));
+                        final LoadFromZipNG loader = new LoadFromZipNG();
+                        WordprocessingMLPackage wordMLPackage = (WordprocessingMLPackage) loader.get(is);
 
-                    final LoadFromZipNG loader = new LoadFromZipNG();
-                    WordprocessingMLPackage wordMLPackage = (WordprocessingMLPackage) loader.get(is);
+                        String IMAGE_DIR_NAME = "images";
 
-                    String IMAGE_DIR_NAME = "images";
+                        String baseURL = getActivity().getDir(IMAGE_DIR_NAME, MODE_PRIVATE).toURL().toString();
+                        System.out.println(baseURL);
 
-                    String baseURL = getActivity().getDir(IMAGE_DIR_NAME, MODE_PRIVATE).toURL().toString();
-                    System.out.println(baseURL);
+                        ConversionImageHandler conversionImageHandler = new AndroidFileConversionImageHandler(IMAGE_DIR_NAME,
+                                baseURL, false, getActivity());
 
-                    ConversionImageHandler conversionImageHandler = new AndroidFileConversionImageHandler(IMAGE_DIR_NAME,
-                            baseURL, false, getActivity());
+                        HtmlExporterNonXSLT withoutXSLT = new HtmlExporterNonXSLT(wordMLPackage, conversionImageHandler);
 
-                    HtmlExporterNonXSLT withoutXSLT = new HtmlExporterNonXSLT(wordMLPackage, conversionImageHandler);
+                        final String html = Jsoup.parse(XmlUtils.w3CDomNodeToString(withoutXSLT.export()), "ISO-8859-1").select("body").text();
 
-                    final String html = Jsoup.parse(XmlUtils.w3CDomNodeToString(withoutXSLT.export()), "ISO-8859-1").select("body").text();
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                                content.setText(html);
+                                pdReadingDocument.hide();
 
-                            content.setText(html);
-                            pd.hide();
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                                pdReadingDocument.hide();
 
-                            pd.hide();
-
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }catch (Exception ex)
+        {
+            Toast.makeText(getActivity(),"Unable to read document",Toast.LENGTH_SHORT);
+        }
     }
     int getWordsLimit() {
         try
@@ -395,13 +464,13 @@ public class PlagiarismCheckerFragment extends Fragment {
 
 
         Call<PlagiarismResponse> call = plagService.checkPlagiarism(keyParam, dataParam);
-        pd.show();
+        pdChecking.show();
 
         inflateDialogBoxViewLayout();
         call.enqueue(new Callback<PlagiarismResponse>() {
             @Override
             public void onResponse(Call<PlagiarismResponse> call, Response<PlagiarismResponse> response) {
-                pd.hide();
+                pdChecking.hide();
                 if(response != null){
                     updateResult(response);
                 }
@@ -411,50 +480,67 @@ public class PlagiarismCheckerFragment extends Fragment {
             public void onFailure(Call<PlagiarismResponse> call, Throwable t) {
                 // Log error here since request failed
                 Log.e("failure", "failure");
-                pd.hide();
+                pdChecking.hide();
             }
         });
     }
     private void updateResult( Response<PlagiarismResponse> response)
     {
+        if(!response.body().isQueriesFinished()) {
+            uniquePerTextView.setText(response.body().getUniquePercent().intValue() + "%");
+            plagPerTextView.setText(response.body().getPlagPercent().intValue() + "%");
+            addDetailedItems(response.body().getDetails());
 
-        apiProgressTextView.setText("100%");
-        uniquePerTextView.setText( response.body().getUniquePercent().intValue()+"%");
-        plagPerTextView.setText(response.body().getPlagPercent().intValue()+"%");
-        addDetailedItems(response.body().getDetails());
-
-
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        double height = size.y* 0.8;
-        customDialogBox = DialogPlus.newDialog(getActivity())
-        .setContentHolder(new ViewHolder(dialogueBoxView))
-        .setHeader(R.layout.result_header)
-        .setGravity(Gravity.CENTER)
-        .setCancelable(true)
-        .setInAnimation(R.anim.abc_fade_in)
-        .setOutAnimation(R.anim.abc_fade_out)
-        .setMargin(16, 16, 16, 16)
-        .setContentWidth(ViewGroup.LayoutParams.WRAP_CONTENT)  // or any custom width ie: 300
-        .setContentHeight((int)height)
-                .setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(DialogPlus dialog, View view) {
-                        onDialogBoxClicked(dialog,view);
+            Display display = getActivity().getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            double height = size.y * 0.8;
+            customDialogBox = DialogPlus.newDialog(getActivity())
+                    .setContentHolder(new ViewHolder(dialogueBoxView))
+                    .setHeader(R.layout.result_header)
+                    .setGravity(Gravity.CENTER)
+                    .setCancelable(true)
+                    .setInAnimation(R.anim.abc_fade_in)
+                    .setOutAnimation(R.anim.abc_fade_out)
+                    .setMargin(16, 16, 16, 16)
+                    .setContentWidth(ViewGroup.LayoutParams.WRAP_CONTENT)  // or any custom width ie: 300
+                    .setContentHeight((int) height)
+                    .setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(DialogPlus dialog, View view) {
+                            onDialogBoxClicked(dialog, view);
+                        }
+                    })
+                    .create();
+            customDialogBox.show();
+        }else
+        {
+            showQueriesFinishedDialogueBox();
+        }
+    }
+    void showQueriesFinishedDialogueBox()
+    {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_Light_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(getActivity());
+        }
+        builder.setTitle("Queries finished")
+                .setMessage("Please upgrade your account to get more queries. Do you want to upgrade?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        buyPlans();
                     }
                 })
-        .setOnDismissListener(new OnDismissListener() {
-            @Override
-            public void onDismiss(DialogPlus dialog) {
-                apiProgressTextView.setText("0%");
-            }
-        })
-        .create();
-        customDialogBox.show();
-
-
-        //Toast.makeText(getActivity(),"Plagiarism : " + response.body().getPlagPercent().toString() + " Uniqueness : " + response.body().getUniquePercent().toString(),Toast.LENGTH_SHORT).show();
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
     void onDialogBoxClicked(DialogPlus dialog, View view)
     {

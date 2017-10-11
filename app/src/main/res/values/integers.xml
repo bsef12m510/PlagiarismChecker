@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="free">1000</integer>
-    <integer name="premium">10000</integer>
+    <integer name="premium">20000</integer>
 </resources>

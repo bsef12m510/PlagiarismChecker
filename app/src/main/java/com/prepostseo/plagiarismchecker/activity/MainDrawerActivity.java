@@ -34,6 +34,7 @@ public class MainDrawerActivity extends AppCompatActivity
     private static String TAG_PLAG = "plagFrag";
     private static String TAG_ACCOUNT_INFO = "infoFrag";
     public static String TAG_PLANS = "plansFragment";
+    public NavigationView navigationView;
 
     private TextView userNameTextView,emailTextView;
     @Override
@@ -50,7 +51,7 @@ public class MainDrawerActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View  headerView=(View)navigationView.getHeaderView(0);
         userNameTextView=(TextView)headerView.findViewById(R.id.header_username);

@@ -34,6 +34,7 @@
     <string name="unique">Unique</string>
     <string name="_1000">1000</string>
     <string name="quries_limit"><u>Quries Limit</u></string>
+    <string name="quries_used"><u>Quries Used</u></string>
     <string name="title_activity_main">MainActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
 </resources>

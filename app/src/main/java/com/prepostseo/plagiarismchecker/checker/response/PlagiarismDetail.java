@@ -2,9 +2,6 @@ package com.prepostseo.plagiarismchecker.checker.response;
 
 import java.util.List;
 
-/**
- * Created by zeeshan on 9/24/2017.
- */
 public class PlagiarismDetail {
 
     private String query;

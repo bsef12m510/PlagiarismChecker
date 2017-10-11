@@ -109,6 +109,7 @@ public class RegisterFragment extends Fragment implements GoogleApiClient.OnConn
         initialize();
         setClickListeners();
         pd = new ProgressDialog(getActivity());
+        pd.setMessage("Creating your account");
         pd.setCanceledOnTouchOutside(false);
     }
 

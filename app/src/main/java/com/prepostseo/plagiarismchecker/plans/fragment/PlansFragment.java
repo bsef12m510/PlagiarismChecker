@@ -21,7 +21,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
@@ -31,8 +30,6 @@ import com.prepostseo.plagiarismchecker.api.ApiClient;
 import com.prepostseo.plagiarismchecker.plans.response.UpgradeUserResponse;
 
 import com.prepostseo.plagiarismchecker.plans.restInterface.UpgradeService;
-import com.prepostseo.plagiarismchecker.register.response.RegisterResponse;
-import com.prepostseo.plagiarismchecker.register.restInterface.RegisterService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -140,7 +137,7 @@ public class PlansFragment extends Fragment implements BillingProcessor.IBilling
     }
     static void initializeMonthlyButtons(View contentView)
     {
-        planButton = (Button)contentView.findViewById(R.id.basicPlan);
+        planButton = (Button)contentView.findViewById(R.id.monthlyBasic);
         monthlyStandard = (Button)contentView.findViewById(R.id.monthlyStandard);
         monthlyCompany = (Button)contentView.findViewById(R.id.monthlyCompany);
     }
@@ -396,33 +393,31 @@ public class PlansFragment extends Fragment implements BillingProcessor.IBilling
     {
         if(response!=null)
         {
-            if(response.getResponse()==1) {
+            if(response.getResponse() == 1)
+            {
                 //successfull
+                upgradeMembership();
                 Toast.makeText(getActivity(),"Your account upgraded",Toast.LENGTH_SHORT).show();
-            }else
+            }
+            else
             {
                 //unsuccessfull
                 Toast.makeText(getActivity(),"Could not upgrade your account. Please try again later.",Toast.LENGTH_SHORT).show();
             }
-        }else
+        }
+        else
         {
             Toast.makeText(getActivity(),"Could not upgrade your account. Please try again later.",Toast.LENGTH_SHORT).show();
             //unsuccessfull
         }
-//        This is the URL for upgradation of user
-//        https://www.prepostseo.com/app/upgradeUser
-//        Parameters Required
-//        -- key
-//        -- packageName
-//        -- subscriptionId
-//        -- token
 
-//         Response Type will be like this
-//           {"response":0,"error":"Invalid API Key Used"}
-//         examples 2:
-//         {"response":0,"error":"Unable to verify the requested parameters"}
-//            IF SUCCESSFULL
-//          {"response":1,"msg":"Your Account Upgraded"}
+    }
+    void upgradeMembership()
+    {
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(
+                "com.prepostseo.plagiarismchecker", Context.MODE_PRIVATE);
+        prefs.edit().putBoolean("membership", true ).apply();
     }
 
 }

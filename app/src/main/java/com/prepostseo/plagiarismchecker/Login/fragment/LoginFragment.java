@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
@@ -66,6 +65,7 @@ public class LoginFragment extends Fragment {
         initialize(contentView);
         setClickListeners();
         pd = new ProgressDialog(getActivity());
+        pd.setMessage("Logging you in");
         pd.setCanceledOnTouchOutside(false);
  }
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,6 +21,9 @@ import com.prepostseo.plagiarismchecker.accountDetails.restInterface.AccountInfo
 import com.prepostseo.plagiarismchecker.activity.MainDrawerActivity;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
 import com.prepostseo.plagiarismchecker.plans.fragment.PlansFragment;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -72,6 +76,7 @@ public class AccountInfoFragment extends Fragment {
 
     public void initialize(){
         pd = new ProgressDialog(getActivity());
+        pd.setMessage("Fetching account information");
         pd.setCanceledOnTouchOutside(false);
         usernameTextView = (TextView) contentView.findViewById(R.id.username);
         apikeyTopTextView = (TextView) contentView.findViewById(R.id.api_key);
@@ -90,7 +95,7 @@ public class AccountInfoFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                onnClickAddMoreQueries(v);
+                onClickAddMoreQueries(v);
             }
         });
     }
@@ -120,9 +125,10 @@ public class AccountInfoFragment extends Fragment {
             }
         });
     }
-    public void onnClickAddMoreQueries(View view)
+    public void onClickAddMoreQueries(View view)
     {
         ((MainDrawerActivity)getActivity()).replaceFragment(new PlansFragment(),MainDrawerActivity.TAG_PLANS);
+        ((MainDrawerActivity)getActivity()).navigationView.setCheckedItem(R.id.nav_plans);
     }
     private void assignValues(LoginResponse response)
     {
@@ -130,17 +136,21 @@ public class AccountInfoFragment extends Fragment {
             usernameTextView.setText(response.getUser_name());
             apikeyTopTextView.setText(response.getApi_key());
             apikeyBottomTextView.setText(response.getApi_key());
-            quriesLimitTopTextView.setText(response.getQueries_limit());
-            quriesLimitBottomTextView.setText(response.getQueries_limit());
-            quriesUsedTopTextView.setText(response.getQueries_used());
-            quriesUsedBottomTextView.setText(Integer.parseInt(response.getQueries_limit()) + " (" + Integer.toString ((Integer.parseInt(response.getQueries_used())/Integer.parseInt(response.getQueries_limit()))/100) +  "% used )" );
+            quriesLimitTopTextView.setText(getFormatedAmount(response.getQueries_limit()));
+            quriesLimitBottomTextView.setText(getFormatedAmount(response.getQueries_limit()));
+            quriesUsedTopTextView.setText(getFormatedAmount(response.getQueries_used()));
+            quriesUsedBottomTextView.setText(Integer.parseInt(response.getQueries_used()) + " (" + Integer.toString ((Integer.parseInt(response.getQueries_used())/Integer.parseInt(response.getQueries_limit()))/100) +  "% used )" );
             emailTextView.setText(response.getUser_email());
+
             String membership= "Free";
-            if(response.getPremium()=="1") {
+            if(response.getPremium().equals("1")) {
                 membership="Premium";
             }
             membershipTextView.setText(membership);
         }
+    }
+    private String getFormatedAmount(String amount){
+        return NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(amount));
     }
 
 }

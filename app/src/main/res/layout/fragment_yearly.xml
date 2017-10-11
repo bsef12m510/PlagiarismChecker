@@ -12,6 +12,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
+        android:scrollbars="none"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -26,34 +27,55 @@
                 android:gravity="center"
                 android:orientation="vertical">
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
                     android:background="@color/bg_gray">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="20sp"
-                    android:text="Basic"/>
-
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:layout_weight="7"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:textSize="20sp"
+                        android:text="Basic"/>
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="3"
+                        android:layout_gravity="end"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/planbox_img"/>
                 </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:textSize="35sp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:text="$45/year"/>
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="35sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:text="$45/"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="35sp"
+                        android:textAlignment="center"
+                        android:text="year"/>
+                </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/buttonGray"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
+                    android:paddingBottom="10dp"
                     android:textSize="20sp"
                     android:textAlignment="center"
                     android:textStyle="bold"
@@ -82,34 +104,55 @@
                 android:gravity="center"
                 android:orientation="vertical">
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
                     android:background="@color/bg_gray">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:layout_weight="7"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:textSize="20sp"
+                        android:text="Standard"/>
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="3"
+                        android:layout_gravity="end"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/planbox_img"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorBlack"
-                        android:textSize="20sp"
-                        android:text="Standard"/>
-
+                        android:textSize="35sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:text="$100/"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="35sp"
+                        android:textAlignment="center"
+                        android:text="year"/>
                 </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:textSize="35sp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:text="$100/year"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/buttonGray"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
+                    android:paddingBottom="10dp"
                     android:textSize="20sp"
                     android:textAlignment="center"
                     android:textStyle="bold"
@@ -137,34 +180,55 @@
                 android:gravity="center"
                 android:orientation="vertical">
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
                     android:background="@color/bg_gray">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:layout_weight="7"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:textSize="20sp"
+                        android:text="Company"/>
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="3"
+                        android:layout_gravity="end"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/planbox_img"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorBlack"
-                        android:textSize="20sp"
-                        android:text="Company"/>
-
+                        android:textSize="35sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:text="$250/"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="35sp"
+                        android:textAlignment="center"
+                        android:text="year"/>
                 </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:textSize="35sp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:text="$250/year"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/buttonGray"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
+                    android:paddingBottom="10dp"
                     android:textSize="20sp"
                     android:textAlignment="center"
                     android:textStyle="bold"
@@ -187,5 +251,4 @@
 
         </LinearLayout>
     </ScrollView>
-
 </RelativeLayout>
