@@ -7,6 +7,7 @@ public class LoginResponse {
     private String user_name;
     private String user_email;
     private String queries_limit;
+    private String expire_date;
 
     public String getQueries_used() {
         return queries_used;
@@ -60,6 +61,13 @@ public class LoginResponse {
     private String premium;
     private String verified;
     private Integer response;
+    public String getExpireDate() {
+        return expire_date;
+    }
+
+    public void setExpireDate(String expireDate) {
+        this.expire_date = expireDate;
+    }
 
 
 

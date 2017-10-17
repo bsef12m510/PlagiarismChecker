@@ -23,6 +23,9 @@ import com.prepostseo.plagiarismchecker.api.ApiClient;
 import com.prepostseo.plagiarismchecker.plans.fragment.PlansFragment;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import okhttp3.MediaType;
@@ -39,7 +42,7 @@ public class AccountInfoFragment extends Fragment {
     private ProgressDialog pd;
     private View contentView;
     private Button addMoreQueries;
-    private TextView usernameTextView, apikeyTopTextView, quriesLimitTopTextView, quriesUsedTopTextView, emailTextView,apikeyBottomTextView, quriesLimitBottomTextView, quriesUsedBottomTextView,membershipTextView;
+    private TextView usernameTextView, apikeyTopTextView, quriesLimitTopTextView, quriesUsedTopTextView, emailTextView,apikeyBottomTextView, quriesLimitBottomTextView, quriesUsedBottomTextView,membershipTextView,expiresTextView;
     public AccountInfoFragment() {
         // Required empty public constructor
     }
@@ -88,6 +91,7 @@ public class AccountInfoFragment extends Fragment {
         quriesUsedBottomTextView = (TextView) contentView.findViewById(R.id.query_used_double);
         membershipTextView = (TextView) contentView.findViewById(R.id.membership);
         addMoreQueries=(Button)contentView.findViewById(R.id.add_more_queries);
+        expiresTextView=(TextView)contentView.findViewById(R.id.membership_expire);
     }
     void addClickListeners()
     {
@@ -139,14 +143,25 @@ public class AccountInfoFragment extends Fragment {
             quriesLimitTopTextView.setText(getFormatedAmount(response.getQueries_limit()));
             quriesLimitBottomTextView.setText(getFormatedAmount(response.getQueries_limit()));
             quriesUsedTopTextView.setText(getFormatedAmount(response.getQueries_used()));
-            quriesUsedBottomTextView.setText(Integer.parseInt(response.getQueries_used()) + " (" + Integer.toString ((Integer.parseInt(response.getQueries_used())/Integer.parseInt(response.getQueries_limit()))/100) +  "% used )" );
+            int percentageComplete=(int)((Double.parseDouble(response.getQueries_used())/Double.parseDouble(response.getQueries_limit()))*100.00);
+            quriesUsedBottomTextView.setText(Integer.parseInt(response.getQueries_used()) + " (" + Integer.toString (percentageComplete) +  "% used )" );
             emailTextView.setText(response.getUser_email());
+
 
             String membership= "Free";
             if(response.getPremium().equals("1")) {
                 membership="Premium";
+                int numberOfseconds =Integer.parseInt( response.getExpireDate());
+                Calendar calendar = Calendar.getInstance(Locale.getDefault());
+                Date date=new Date();
+                date.setTime((long)numberOfseconds*1000);
+                calendar.setTime(date);
+                SimpleDateFormat formatDate = new SimpleDateFormat("dd MMM,  yyyy");
+                String formattedDate=formatDate.format(calendar.getTime());
+                expiresTextView.setText("(Expire on: " + formattedDate+")");
             }
             membershipTextView.setText(membership);
+
         }
     }
     private String getFormatedAmount(String amount){

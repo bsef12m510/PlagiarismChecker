@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.dpizarro.pinview.library.PinView;
 import com.dpizarro.pinview.library.PinViewSettings;
 import com.prepostseo.plagiarismchecker.R;
+import com.prepostseo.plagiarismchecker.activity.PublicActivity;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
 import com.prepostseo.plagiarismchecker.register.response.RegisterResponse;
 import com.prepostseo.plagiarismchecker.register.restInterface.RegisterService;
@@ -98,7 +99,7 @@ public class VerifyFragment extends Fragment {
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(verification_code.getPinResults().replaceAll(" ","").length() == 4)
+                if(verification_code.getPinResults().replaceAll(" ","").length() == 4 &&   ((PublicActivity)getActivity()).checkConnection())
                     callVerifyService();
             }
         });

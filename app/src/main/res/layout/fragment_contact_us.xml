@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.prepostseo.plagiarismchecker.contactUs.ContactUs">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <!-- TODO: Update blank fragment layout -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shadow_background"
+            android:drawableLeft="@drawable/ic_account"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:id="@+id/name"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:inputType="text"
+            android:hint="Name"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shadow_background"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:drawableLeft="@drawable/ic_email"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+            android:id="@+id/email"
+            android:inputType="textEmailAddress"
+            android:hint="Email"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shadow_background"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:drawableLeft="@drawable/ic_message"
+            android:drawablePadding="10dp"
+            android:gravity="start|center_vertical"
+            android:padding="10dp"
+            android:minLines="5"
+            android:id="@+id/message"
+            android:hint="Send us what's in your mind"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:text="Send"
+            android:textColor="@android:color/white"
+            android:background="@color/colorAccent"
+            android:id="@+id/submit"
+            android:layout_gravity="right" />
+
+    </LinearLayout>
+
+</LinearLayout>

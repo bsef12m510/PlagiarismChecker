@@ -23,8 +23,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.prepostseo.plagiarismchecker.R;
+import com.prepostseo.plagiarismchecker.aboutUs.AboutUs;
 import com.prepostseo.plagiarismchecker.accountDetails.fragment.AccountInfoFragment;
 import com.prepostseo.plagiarismchecker.checker.fragment.PlagiarismCheckerFragment;
+import com.prepostseo.plagiarismchecker.contactUs.ContactUs;
 import com.prepostseo.plagiarismchecker.plans.fragment.PlansFragment;
 
 public class MainDrawerActivity extends AppCompatActivity
@@ -34,6 +36,9 @@ public class MainDrawerActivity extends AppCompatActivity
     private static String TAG_PLAG = "plagFrag";
     private static String TAG_ACCOUNT_INFO = "infoFrag";
     public static String TAG_PLANS = "plansFragment";
+    public static String TAG_ABOUT = "aboutFragment";
+    public static String TAG_CONTACT = "contactFragment";
+
     public NavigationView navigationView;
 
     private TextView userNameTextView,emailTextView;
@@ -117,6 +122,14 @@ public class MainDrawerActivity extends AppCompatActivity
             replaceFragment(fragment, TAG_PLANS);
         } else if (id == R.id.nav_logout) {
             logout();
+        }
+        else if (id == R.id.nav_about) {
+            Fragment fragment = new AboutUs();
+            replaceFragment(fragment, TAG_ABOUT);
+        }
+        else if (id == R.id.nav_contact) {
+            Fragment fragment = new ContactUs();
+            replaceFragment(fragment, TAG_CONTACT);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

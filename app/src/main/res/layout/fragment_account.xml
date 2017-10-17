@@ -256,15 +256,29 @@
                     android:paddingLeft="5dp"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"/>
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:id="@+id/membership"
-                    android:textSize="12sp"
                     android:paddingTop="2dp"
                     android:paddingBottom="7dp"
-                    android:paddingLeft="5dp" />
+                    android:paddingLeft="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:id="@+id/membership"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="2dp"
+                        android:text=""
+                        android:id="@+id/membership_expire"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
                 <View
                     style="@style/Divider"
                     android:background="@color/bg_gray">

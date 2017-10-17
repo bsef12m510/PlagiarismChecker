@@ -22,6 +22,7 @@ import com.anjlab.android.iab.v3.TransactionDetails;
 import com.prepostseo.plagiarismchecker.Login.response.LoginResponse;
 import com.prepostseo.plagiarismchecker.Login.restInterface.LoginService;
 import com.prepostseo.plagiarismchecker.R;
+import com.prepostseo.plagiarismchecker.activity.PublicActivity;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
 
 import okhttp3.MediaType;
@@ -98,7 +99,9 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                callLoginService();
+                if(((PublicActivity)getActivity()).checkConnection()) {
+                    callLoginService();
+                }
             }
         });
     }

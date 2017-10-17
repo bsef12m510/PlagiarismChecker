@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -54,11 +55,16 @@ import com.prepostseo.plagiarismchecker.checker.restInterface.PlagiarismService;
 import com.prepostseo.plagiarismchecker.plans.fragment.PlansFragment;
 
 import org.apache.commons.io.FilenameUtils;
+import org.docx4j.TextUtils;
 import org.docx4j.XmlUtils;
 import org.docx4j.convert.out.html.HtmlExporterNonXSLT;
 import org.docx4j.model.images.ConversionImageHandler;
+import org.docx4j.openpackaging.contenttype.ContentTypeManager;
+import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.io.LoadFromZipNG;
+import org.docx4j.openpackaging.packages.OpcPackage;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.jsoup.Jsoup;
 
 import java.io.BufferedReader;
@@ -68,6 +74,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -80,6 +89,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -247,6 +257,10 @@ public class PlagiarismCheckerFragment extends Fragment {
                             view.getParent().requestDisallowInterceptTouchEvent(false);
                             break;
                     }
+                     if( event.getAction()== MotionEvent.ACTION_DOWN) {
+                         ((EditText)view).setTextIsSelectable(true);
+                         view.getParent().requestDisallowInterceptTouchEvent(false);
+                     }
                 }
                 return false;
             }
@@ -279,7 +293,7 @@ public class PlagiarismCheckerFragment extends Fragment {
 
 
     private void checkPermissionsAndOpenFilePicker() {
-        String permission = Manifest.permission.READ_EXTERNAL_STORAGE;
+        String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
         if (ContextCompat.checkSelfPermission(getActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
@@ -325,7 +339,6 @@ public class PlagiarismCheckerFragment extends Fragment {
             docPaths = new ArrayList<>();
             docPaths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS));
             if (docPaths.size() > 0) {
-               // Toast.makeText(getActivity(), docPaths.get(0), Toast.LENGTH_SHORT).show();
                 content.setText("");
                 ext = getFileType(docPaths.get(0));
                 if ("pdf".equalsIgnoreCase(ext))
@@ -397,28 +410,10 @@ public class PlagiarismCheckerFragment extends Fragment {
                 public void run() {
                     //TODO your background code
                     try {
-
-                        InputStream is = new FileInputStream(new File(fileName));
-
-                        final LoadFromZipNG loader = new LoadFromZipNG();
-                        WordprocessingMLPackage wordMLPackage = (WordprocessingMLPackage) loader.get(is);
-
-                        String IMAGE_DIR_NAME = "images";
-
-                        String baseURL = getActivity().getDir(IMAGE_DIR_NAME, MODE_PRIVATE).toURL().toString();
-                        System.out.println(baseURL);
-
-                        ConversionImageHandler conversionImageHandler = new AndroidFileConversionImageHandler(IMAGE_DIR_NAME,
-                                baseURL, false, getActivity());
-
-                        HtmlExporterNonXSLT withoutXSLT = new HtmlExporterNonXSLT(wordMLPackage, conversionImageHandler);
-
-                        final String html = Jsoup.parse(XmlUtils.w3CDomNodeToString(withoutXSLT.export()), "ISO-8859-1").select("body").text();
-
+                        final String html=readDocFile(fileName);
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
                                 content.setText(html);
                                 pdReadingDocument.hide();
 
@@ -429,8 +424,8 @@ public class PlagiarismCheckerFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
                                 pdReadingDocument.hide();
+                                Toast.makeText(getActivity(),"Unable to read document",Toast.LENGTH_LONG).show();
 
                             }
                         });
@@ -439,8 +434,45 @@ public class PlagiarismCheckerFragment extends Fragment {
             });
         }catch (Exception ex)
         {
-            Toast.makeText(getActivity(),"Unable to read document",Toast.LENGTH_SHORT);
+            pdReadingDocument.hide();
+            Toast.makeText(getActivity(),"Unable to read document",Toast.LENGTH_LONG).show();
         }
+    }
+    String readDocFile(String fileName)
+    {
+        InputStream is = null;
+        try {
+            is = new FileInputStream(new File(fileName));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        final LoadFromZipNG loader = new LoadFromZipNG();
+        WordprocessingMLPackage wordMLPackage = null;
+        try {
+
+            wordMLPackage = (WordprocessingMLPackage) loader.get(is);
+        } catch (Docx4JException e) {
+            e.printStackTrace();
+        }
+
+        String IMAGE_DIR_NAME = "images";
+
+        String baseURL = null;
+        try {
+            baseURL = getActivity().getDir(IMAGE_DIR_NAME, MODE_PRIVATE).toURL().toString();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        System.out.println(baseURL);
+
+        ConversionImageHandler conversionImageHandler = new AndroidFileConversionImageHandler(IMAGE_DIR_NAME,
+                baseURL, false, getActivity());
+
+        HtmlExporterNonXSLT withoutXSLT = new HtmlExporterNonXSLT(wordMLPackage, conversionImageHandler);
+
+        final String html = Jsoup.parse(XmlUtils.w3CDomNodeToString(withoutXSLT.export()), "ISO-8859-1").select("body").text();
+        return  html;
     }
     int getWordsLimit() {
         try

@@ -27,6 +27,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.prepostseo.plagiarismchecker.R;
+import com.prepostseo.plagiarismchecker.activity.PublicActivity;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
 import com.prepostseo.plagiarismchecker.register.response.RegisterResponse;
 import com.prepostseo.plagiarismchecker.register.restInterface.RegisterService;
@@ -135,16 +136,20 @@ public class RegisterFragment extends Fragment implements GoogleApiClient.OnConn
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callRegisterService();
+                if(((PublicActivity)getActivity()).checkConnection()) {
+                    callRegisterService();
+                }
             }
         });
 
         siginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isGoogleSignin = true;
-                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                startActivityForResult(signInIntent, 007);
+                if(((PublicActivity)getActivity()).checkConnection()) {
+                    isGoogleSignin = true;
+                    Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                    startActivityForResult(signInIntent, 007);
+                }
             }
 
         });

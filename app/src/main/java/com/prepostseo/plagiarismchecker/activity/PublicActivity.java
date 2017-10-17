@@ -5,24 +5,32 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.prepostseo.plagiarismchecker.ConnectivityReceiver;
 import com.prepostseo.plagiarismchecker.Login.fragment.LoginFragment;
 import com.prepostseo.plagiarismchecker.Login.response.LoginResponse;
+import com.prepostseo.plagiarismchecker.MyApplication;
 import com.prepostseo.plagiarismchecker.R;
 import com.prepostseo.plagiarismchecker.register.fragment.RegisterFragment;
 import com.prepostseo.plagiarismchecker.register.fragment.VerifyFragment;
 import com.prepostseo.plagiarismchecker.register.response.RegisterResponse;
 
+import static android.support.design.widget.Snackbar.LENGTH_LONG;
+
 
 public class PublicActivity extends AppCompatActivity implements LoginFragment.OnLoginResponseListener,
-        RegisterFragment.OnRegisterResponseListener, VerifyFragment.OnVerifyResponseListener {
+        RegisterFragment.OnRegisterResponseListener, VerifyFragment.OnVerifyResponseListener, ConnectivityReceiver.ConnectivityReceiverListener  {
 
     private Integer user_id;
     private FrameLayout fragmentContainer;
@@ -169,4 +177,45 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
         startActivity(intent);
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
+    }
+    // Method to manually check connection status
+    public boolean checkConnection() {
+
+        boolean isConnected = ConnectivityReceiver.isConnected();
+       if(!isConnected)
+        {
+           showSnack(isConnected);
+        }
+        return isConnected;
+    }
+    // Showing the status in Snackbar
+    private void showSnack(boolean isConnected) {
+        String message;
+        int color;
+        if (isConnected) {
+            message = "Good! Connected to Internet";
+            color = Color.WHITE;
+        } else {
+            message = "Sorry! Not connected to internet";
+            color = Color.RED;
+        }
+
+        Snackbar snackbar = Snackbar.make(fragmentContainer, message, Snackbar.LENGTH_LONG);
+
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(color);
+        snackbar.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // register connection status listener
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
 }

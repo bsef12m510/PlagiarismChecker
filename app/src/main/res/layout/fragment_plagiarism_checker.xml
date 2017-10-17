@@ -101,8 +101,11 @@
                    android:scrollbars="vertical"
                    android:scrollHorizontally="true"
                    android:overScrollMode="always"
+                   android:cursorVisible="true"
+                   android:longClickable="true"
                    android:hint="Type your text here..."
                    android:textAlignment="viewStart"
+                   android:focusable="true"
                    android:padding="10dp"
                    android:gravity="start"
 
@@ -144,44 +147,9 @@
                android:layout_height="wrap_content"
                android:layout_margin="20dp"
                android:gravity="center">
-           <!--<TextView-->
-               <!--android:layout_width = "wrap_content"-->
-               <!--android:layout_height = "wrap_content"-->
-               <!--android:text = "@string/checking"-->
-               <!--android:textColor = "@color/buttonGray"-->
-               <!--android:layout_marginRight="10dp"-->
-               <!--android:textSize = "20sp" />-->
-           <!--<TextView-->
-               <!--android:layout_width = "wrap_content"-->
-               <!--android:layout_height = "wrap_content"-->
-               <!--android:id="@+id/api_progress_text_view"-->
-               <!--android:text = "0%"-->
-               <!--android:textColor = "@color/colorBlack"-->
-               <!--android:textSize = "20sp"-->
-               <!--android:textStyle="bold" />-->
            </LinearLayout>
        </LinearLayout>
 
    </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>
-<!--<EditText  android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_alignParentTop="true"-->
-<!--android:id="@+id/content"/>-->
 
-
-<!--<Button-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:id="@+id/uploadFile"-->
-<!--android:text="Upload File"-->
-<!--android:layout_alignParentBottom="true"/>-->
-
-<!--<Button-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:id="@+id/check"-->
-<!--android:text="Check"-->
-<!--android:layout_alignParentBottom="true"-->
-<!--android:layout_toRightOf="@+id/uploadFile"-->
-<!--android:layout_alignParentRight="true"/>-->
