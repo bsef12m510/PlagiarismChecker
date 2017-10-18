@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.TextViewCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,10 +20,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.prepostseo.plagiarismchecker.R;
-import com.prepostseo.plagiarismchecker.aboutUs.AboutUs;
+import com.prepostseo.plagiarismchecker.aboutUs.fragment.AboutUs;
 import com.prepostseo.plagiarismchecker.accountDetails.fragment.AccountInfoFragment;
 import com.prepostseo.plagiarismchecker.checker.fragment.PlagiarismCheckerFragment;
-import com.prepostseo.plagiarismchecker.contactUs.ContactUs;
+import com.prepostseo.plagiarismchecker.contactUs.fragment.ContactUs;
 import com.prepostseo.plagiarismchecker.plans.fragment.PlansFragment;
 
 public class MainDrawerActivity extends AppCompatActivity
@@ -64,7 +61,6 @@ public class MainDrawerActivity extends AppCompatActivity
         getSavedHeaderData();
         replaceFragment(new PlagiarismCheckerFragment(),TAG_PLAG);
     }
-
     private void getSavedHeaderData()
     {
         SharedPreferences shared = getSharedPreferences( "com.prepostseo.plagiarismchecker", Context.MODE_PRIVATE);

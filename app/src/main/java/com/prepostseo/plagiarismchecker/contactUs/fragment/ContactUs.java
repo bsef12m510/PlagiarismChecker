@@ -1,7 +1,9 @@
-package com.prepostseo.plagiarismchecker.contactUs;
+package com.prepostseo.plagiarismchecker.contactUs.fragment;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -26,17 +28,15 @@ import retrofit2.Response;
 public class ContactUs extends Fragment {
 
     private String key = "";
-    private EditText nameEditText, emailEditText, messageEditText;
+    private EditText messageEditText;
     private Button submitButton;
     private View contentView;
     private ProgressDialog pd;
-    // Regular Expression
-    // you can change the expression based on your need
-    private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    private String saved_username;
+    private String saved_email;
 
     // Error Messages
     private static final String REQUIRED_MSG = "required";
-    private static final String EMAIL_MSG = "invalid email";
     public ContactUs() {
         // Required empty public constructor
     }
@@ -56,8 +56,6 @@ public class ContactUs extends Fragment {
         pd = new ProgressDialog(getActivity());
         pd.setMessage("Submitting your message");
         pd.setCanceledOnTouchOutside(false);
-        nameEditText =(EditText)contentView.findViewById(R.id.name);
-        emailEditText =(EditText)contentView.findViewById(R.id.email);
         messageEditText =(EditText)contentView.findViewById(R.id.message);
         submitButton=(Button) contentView.findViewById(R.id.submit);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -66,16 +64,19 @@ public class ContactUs extends Fragment {
                 validateForm();
             }
         });
+        getSavedHeaderData();
 
+    }
+    private void getSavedHeaderData()
+    {
+        SharedPreferences shared = getActivity().getSharedPreferences( "com.prepostseo.plagiarismchecker", Context.MODE_PRIVATE);
+        saved_username = shared.getString("username", "");
+        saved_email = shared.getString("email","");
     }
     void validateForm()
     {
-        if(hasText(nameEditText)&&hasText(emailEditText)&&hasText(messageEditText))
-        {
-            if(isEmailAddress(emailEditText,true))
-            {
-                callSubmitMsgService(nameEditText.getText().toString(),emailEditText.getText().toString(),messageEditText.getText().toString());
-            }
+        if(hasText(messageEditText)) {
+            callSubmitMsgService(saved_username,saved_email,messageEditText.getText().toString());
         }
     }
     public void callSubmitMsgService(String name,String email,String message){
@@ -90,8 +91,6 @@ public class ContactUs extends Fragment {
                 if(response != null) {
                     //set UI
                     if (response.body().getResponse().equals("1")) {
-                        nameEditText.setText("");
-                        emailEditText.setText("");
                         messageEditText.setText("");
                         Toast.makeText(getActivity(), response.body().getMsg(), Toast.LENGTH_LONG).show();
                     }else {
@@ -122,36 +121,6 @@ public class ContactUs extends Fragment {
         }
 
         return true;
-    }
-
-    // call this method when you need to check emailEditText validation
-    public boolean isEmailAddress(EditText editText, boolean required) {
-        return isValid(editText, EMAIL_REGEX, EMAIL_MSG, required);
-    }
-    // return true if the input field is valid, based on the parameter passed
-    public  boolean isValid(EditText editText, String regex, String errMsg, boolean required) {
-
-        String text = editText.getText().toString().trim();
-        // clearing the error, if it was previously set by some other values
-        editText.setError(null);
-
-        boolean returnValue=false;
-
-        // text required and editText is blank, so return false
-        if ( required && !hasText(editText) )
-            returnValue= false;
-
-
-        // pattern doesn't match so returning false
-        if (required && !Pattern.matches(regex, text)) {
-            editText.setError(errMsg);
-            returnValue= false;
-        }else
-        {
-            returnValue=true;
-        }
-
-        return returnValue;
     }
 
     @Override

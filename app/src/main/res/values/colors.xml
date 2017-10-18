@@ -12,7 +12,9 @@
     <item name="bgQueryUsedColor" type="color">#f2f2f2</item>
     <item name="bgAccountHeaderColor" type="color">#f8f8f8</item>
     <item name="plansSlashAfterColor" type="color">#f8f8f8</item>
-
-
-
+    <item name="resultUnique" type="color">#3c763d</item>
+    <item name="resultplag" type="color">#a94442</item>
+    <item name="resultUniqueBg" type="color">#f6f6f6</item>
+    <item name="resultPlagBg" type="color">#f2f2f2</item>
+    <item name="resultItemBg" type="color">#fcfcfc</item>
 </resources>
