@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="4">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="15dp"
+                android:background="@color/resultUniqueBg">
+                <TextView
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:text = "0%"
+                    android:id="@+id/unique_perc_text_view"
+                    android:textColor = "@color/resultUnique"
+                    android:textSize = "20sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:text = "@string/unique"
+                    android:textAllCaps="true"
+                    android:textColor = "@color/resultUnique"
+                    android:textSize = "20sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="end"
+                android:padding="15dp"
+                android:background="@color/resultPlagBg">
+                <TextView
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:text = "0%"
+                    android:id="@+id/plag_perc_text_view"
+                    android:textColor = "@color/resultplag"
+                    android:textSize = "20sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:text = "Plagiarized"
+                    android:textAllCaps="true"
+                    android:textColor = "@color/resultplag"
+                    android:textSize = "20sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_layout"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>
+

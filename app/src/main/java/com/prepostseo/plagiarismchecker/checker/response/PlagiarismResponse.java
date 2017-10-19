@@ -1,8 +1,9 @@
 package com.prepostseo.plagiarismchecker.checker.response;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PlagiarismResponse {
+public class PlagiarismResponse implements Serializable {
     private Integer totalQueries;
 
     private Double plagPercent;

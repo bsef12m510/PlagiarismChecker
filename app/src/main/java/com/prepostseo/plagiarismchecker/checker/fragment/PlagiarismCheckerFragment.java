@@ -48,6 +48,7 @@ import com.orhanobut.dialogplus.OnDismissListener;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.prepostseo.plagiarismchecker.R;
 import com.prepostseo.plagiarismchecker.activity.MainDrawerActivity;
+import com.prepostseo.plagiarismchecker.activity.ResultActivity;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
 import com.prepostseo.plagiarismchecker.checker.response.PlagiarismDetail;
 import com.prepostseo.plagiarismchecker.checker.response.PlagiarismResponse;
@@ -110,7 +111,7 @@ public class PlagiarismCheckerFragment extends Fragment {
     private String key = "";
     private ProgressDialog pdReadingDocument;
     private ProgressDialog pdChecking;
-    private TextView uniquePerTextView,plagPerTextView;
+//    private TextView uniquePerTextView,plagPerTextView;
     private DialogPlus customDialogBox;
     private ScrollView dialogueBoxView;
     private TextView wordsLimit,currentwords;
@@ -498,7 +499,7 @@ public class PlagiarismCheckerFragment extends Fragment {
         Call<PlagiarismResponse> call = plagService.checkPlagiarism(keyParam, dataParam);
         pdChecking.show();
 
-        inflateDialogBoxViewLayout();
+        //inflateDialogBoxViewLayout();
         call.enqueue(new Callback<PlagiarismResponse>() {
             @Override
             public void onResponse(Call<PlagiarismResponse> call, Response<PlagiarismResponse> response) {
@@ -519,32 +520,34 @@ public class PlagiarismCheckerFragment extends Fragment {
     private void updateResult( Response<PlagiarismResponse> response)
     {
         if(!response.body().isQueriesFinished()) {
-            uniquePerTextView.setText(response.body().getUniquePercent().intValue() + "%");
-            plagPerTextView.setText(response.body().getPlagPercent().intValue() + "%");
-            addDetailedItems(response.body().getDetails());
+//            uniquePerTextView.setText(response.body().getUniquePercent().intValue() + "%");
+//            plagPerTextView.setText(response.body().getPlagPercent().intValue() + "%");
+             Intent intent=new Intent(getActivity(), ResultActivity.class);
+             intent.putExtra("response", response.body());
+             getActivity().startActivity(intent);
 
-            Display display = getActivity().getWindowManager().getDefaultDisplay();
-            Point size = new Point();
-            display.getSize(size);
-            double height = size.y * 0.8;
-            customDialogBox = DialogPlus.newDialog(getActivity())
-                    .setContentHolder(new ViewHolder(dialogueBoxView))
-                    .setHeader(R.layout.result_header)
-                    .setGravity(Gravity.CENTER)
-                    .setCancelable(true)
-                    .setInAnimation(R.anim.abc_fade_in)
-                    .setOutAnimation(R.anim.abc_fade_out)
-                    .setMargin(16, 16, 16, 16)
-                    .setContentWidth(ViewGroup.LayoutParams.WRAP_CONTENT)  // or any custom width ie: 300
-                    .setContentHeight((int) height)
-                    .setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(DialogPlus dialog, View view) {
-                            onDialogBoxClicked(dialog, view);
-                        }
-                    })
-                    .create();
-            customDialogBox.show();
+//            Display display = getActivity().getWindowManager().getDefaultDisplay();
+//            Point size = new Point();
+//            display.getSize(size);
+//            double height = size.y * 0.8;
+//            customDialogBox = DialogPlus.newDialog(getActivity())
+//                    .setContentHolder(new ViewHolder(dialogueBoxView))
+//                    .setHeader(R.layout.result_header)
+//                    .setGravity(Gravity.CENTER)
+//                    .setCancelable(true)
+//                    .setInAnimation(R.anim.abc_fade_in)
+//                    .setOutAnimation(R.anim.abc_fade_out)
+//                    .setMargin(16, 16, 16, 16)
+//                    .setContentWidth(ViewGroup.LayoutParams.WRAP_CONTENT)  // or any custom width ie: 300
+//                    .setContentHeight((int) height)
+//                    .setOnClickListener(new OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogPlus dialog, View view) {
+//                            onDialogBoxClicked(dialog, view);
+//                        }
+//                    })
+//                    .create();
+//            customDialogBox.show();
         }else
         {
             showQueriesFinishedDialogueBox();
@@ -574,54 +577,54 @@ public class PlagiarismCheckerFragment extends Fragment {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
-    void onDialogBoxClicked(DialogPlus dialog, View view)
-    {
-        if(view.getId()==R.id.cross_imgview)
-        {
-            if(customDialogBox.isShowing()) {
-                customDialogBox.dismiss();
-            }
-        }
-    }
-    void addDetailedItems(List<PlagiarismDetail> detailItems)
-    {
-        if(!detailItems.isEmpty())
-        {
-            for (PlagiarismDetail item:detailItems)
-            {
-                if(item!=null)
-                {
-                    if(item.getUnique())
-                    {
-                        LinearLayout itemLayout = inflateUniqueItemLayout();
-                        TextView textView=(TextView) itemLayout.findViewById(R.id.detail_text);
-                        textView.setText(item.getQuery());
-                        ((LinearLayout)dialogueBoxView.findViewById(R.id.detail_layout)).addView(itemLayout);
-                    }else
-                    {
-                        LinearLayout itemLayout=inflatePlagiarizedItemLayout();
-                        TextView textView=(TextView) itemLayout.findViewById(R.id.detail_text);
-                        textView.setText(item.getQuery());
-                        ((LinearLayout)dialogueBoxView.findViewById(R.id.detail_layout)).addView(itemLayout);
-                    }
-                }
-            }
-        }
-    }
-    void inflateDialogBoxViewLayout()
-    {
-        dialogueBoxView=(ScrollView) LayoutInflater.from(getActivity()).inflate(R.layout.result_view, null);
-        uniquePerTextView=(TextView)dialogueBoxView.findViewById(R.id.unique_perc_text_view);
-        plagPerTextView=(TextView)dialogueBoxView.findViewById(R.id.plag_perc_text_view);
-    }
-    LinearLayout inflatePlagiarizedItemLayout()
-    {
-       return (LinearLayout)LayoutInflater.from(getActivity()).inflate(R.layout.plagiarise_content_view, null);
-    }
-    LinearLayout inflateUniqueItemLayout()
-    {
-        return (LinearLayout)LayoutInflater.from(getActivity()).inflate(R.layout.unique_content_view, null);
-    }
+//    void onDialogBoxClicked(DialogPlus dialog, View view)
+//    {
+//        if(view.getId()==R.id.cross_imgview)
+//        {
+//            if(customDialogBox.isShowing()) {
+//                customDialogBox.dismiss();
+//            }
+//        }
+//    }
+//    void addDetailedItems(List<PlagiarismDetail> detailItems)
+//    {
+//        if(!detailItems.isEmpty())
+//        {
+//            for (PlagiarismDetail item:detailItems)
+//            {
+//                if(item!=null)
+//                {
+//                    if(item.getUnique())
+//                    {
+//                        LinearLayout itemLayout = inflateUniqueItemLayout();
+//                        TextView textView=(TextView) itemLayout.findViewById(R.id.detail_text);
+//                        textView.setText(item.getQuery());
+//                        ((LinearLayout)dialogueBoxView.findViewById(R.id.detail_layout)).addView(itemLayout);
+//                    }else
+//                    {
+//                        LinearLayout itemLayout=inflatePlagiarizedItemLayout();
+//                        TextView textView=(TextView) itemLayout.findViewById(R.id.detail_text);
+//                        textView.setText(item.getQuery());
+//                        ((LinearLayout)dialogueBoxView.findViewById(R.id.detail_layout)).addView(itemLayout);
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    void inflateDialogBoxViewLayout()
+//    {
+//        dialogueBoxView=(ScrollView) LayoutInflater.from(getActivity()).inflate(R.layout.result_view, null);
+//        uniquePerTextView=(TextView)dialogueBoxView.findViewById(R.id.unique_perc_text_view);
+//        plagPerTextView=(TextView)dialogueBoxView.findViewById(R.id.plag_perc_text_view);
+//    }
+//    LinearLayout inflatePlagiarizedItemLayout()
+//    {
+//       return (LinearLayout)LayoutInflater.from(getActivity()).inflate(R.layout.plagiarise_content_view, null);
+//    }
+//    LinearLayout inflateUniqueItemLayout()
+//    {
+//        return (LinearLayout)LayoutInflater.from(getActivity()).inflate(R.layout.unique_content_view, null);
+//    }
 
     /**
      * This interface must be implemented by activities that contain this

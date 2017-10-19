@@ -22,6 +22,7 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -39,6 +40,11 @@
             android:name=".activity.MainDrawerActivity"
             android:label="@string/title_activity_main_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ResultActivity"
+            android:label="@string/title_activity_result"
+            android:theme="@style/ResultTheme"
+            android:parentActivityName=".activity.MainDrawerActivity"/>
     </application>
 
 </manifest>

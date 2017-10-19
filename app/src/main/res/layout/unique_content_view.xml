@@ -10,7 +10,7 @@
     android:layout_margin="5dp">
     <View
         android:layout_width="3dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_gravity="center"
         android:background="@color/resultUnique">
     </View>
@@ -24,14 +24,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Unique"
-            android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textColor="@color/resultUnique"
             android:textAllCaps="true" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text=""
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:minLines="3"
             android:id="@+id/detail_text"
             android:textSize="12sp"
             android:textAllCaps="false" />
