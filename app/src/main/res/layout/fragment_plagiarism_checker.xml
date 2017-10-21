@@ -4,9 +4,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:paddingBottom="@dimen/activity_vertical_margin">
    <android.support.v4.widget.NestedScrollView
        android:layout_width="match_parent"
        android:layout_height="match_parent">
@@ -105,11 +103,9 @@
                    android:longClickable="true"
                    android:hint="Type your text here..."
                    android:textAlignment="viewStart"
-                   android:focusable="true"
                    android:padding="10dp"
                    android:gravity="start"
-
-
+                   android:focusable="true"
                    android:id="@+id/content"/>
            </LinearLayout>
            <LinearLayout

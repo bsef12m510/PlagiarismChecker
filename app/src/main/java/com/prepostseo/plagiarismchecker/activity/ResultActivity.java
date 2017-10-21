@@ -1,5 +1,8 @@
 package com.prepostseo.plagiarismchecker.activity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,11 +24,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.prepostseo.plagiarismchecker.R;
 import com.prepostseo.plagiarismchecker.checker.response.PlagiarismDetail;
 import com.prepostseo.plagiarismchecker.checker.response.PlagiarismResponse;
+import com.prepostseo.plagiarismchecker.checker.response.PlagiarismSource;
 
 import java.util.List;
 
@@ -34,6 +39,7 @@ public class ResultActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private static TextView uniquePerTextView,plagPerTextView;
     private static PlagiarismResponse response;
+    private static Activity activity;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -44,6 +50,8 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+        activity=this;
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -121,17 +129,21 @@ public class ResultActivity extends AppCompatActivity {
             int section_number = getArguments().getInt(ARG_SECTION_NUMBER);
             if(section_number == 1) {
                 rootView = inflater.inflate(R.layout.fragment_result, container, false);
-                inflateSentenceWiseCompletionLayout(rootView,inflater,rootView);
+                inflateSentenceWiseCompletionLayout(rootView,inflater);
+            }
+            else if(section_number == 2) {
+                rootView = inflater.inflate(R.layout.fragment_sources, container, false);
+                addSourcesItems(response.getSources(),inflater,rootView);
             }
             return rootView;
         }
     }
-    static void inflateSentenceWiseCompletionLayout(View view , LayoutInflater inflater,View rootView)
+    static void inflateSentenceWiseCompletionLayout(View view , LayoutInflater inflater)
     {
         inflateDialogBoxViewLayout(view);
         uniquePerTextView.setText(response.getUniquePercent().intValue() + "%");
         plagPerTextView.setText(response.getPlagPercent().intValue() + "%");
-        addDetailedItems(response.getDetails(),inflater,rootView);
+        addDetailedItems(response.getDetails(),inflater,view);
     }
     static void inflateDialogBoxViewLayout(View rootView)
     {
@@ -162,6 +174,37 @@ public class ResultActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+    static void addSourcesItems(List<PlagiarismSource> sourceItems, LayoutInflater inflater, View rootView)
+    {
+        if(!sourceItems.isEmpty())
+        {
+            for (PlagiarismSource item:sourceItems)
+            {
+                if(item!=null)
+                {
+                    LinearLayout itemLayout = inflateSourceItemLayout(inflater);
+                    itemLayout.setTag(item);
+                    TextView linkTextView=(TextView) itemLayout.findViewById(R.id.link);
+                    linkTextView.setText(item.getLink());
+                    TextView percentageTextView=(TextView) itemLayout.findViewById(R.id.percentage);
+                    percentageTextView.setText(item.getPercent()+"%");
+                    itemLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            PlagiarismSource item =(PlagiarismSource)v.getTag();
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getLink()));
+                            activity.startActivity(browserIntent);
+                        }
+                    });
+                    ((LinearLayout)rootView.findViewById(R.id.table_layout)).addView(itemLayout);
+                }
+            }
+        }
+    }
+    static LinearLayout inflateSourceItemLayout(LayoutInflater inflater)
+    {
+        return (TableRow)inflater.inflate(R.layout.sources_cell, null);
     }
     static LinearLayout inflatePlagiarizedItemLayout(LayoutInflater inflater)
     {
@@ -200,7 +243,7 @@ public class ResultActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Sentence Wise Results";
+                    return "Overall Results";
                 case 1:
                     return "Matched Sources";
             }

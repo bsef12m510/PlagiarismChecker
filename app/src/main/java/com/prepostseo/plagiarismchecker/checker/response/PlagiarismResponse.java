@@ -57,4 +57,10 @@ public class PlagiarismResponse implements Serializable {
     public void setDetails(List<PlagiarismDetail> details) {
         this.details = details;
     }
+
+    private List<PlagiarismSource> sources;
+
+    public List<PlagiarismSource> getSources() { return this.sources; }
+
+    public void setSources(List<PlagiarismSource> sources) { this.sources = sources; }
 }

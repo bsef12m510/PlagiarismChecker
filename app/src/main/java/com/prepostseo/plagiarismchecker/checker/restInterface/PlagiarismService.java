@@ -12,5 +12,5 @@ import retrofit2.http.Part;
 public interface PlagiarismService {
     @Multipart
     @POST("apis/checkPlag")
-    Call<PlagiarismResponse> checkPlagiarism( @Part("key") RequestBody key, @Part("data") RequestBody data);
+    Call<PlagiarismResponse> checkPlagiarism( @Part("key") RequestBody key, @Part("data") RequestBody data, @Part("checksources") RequestBody checksources);
 }

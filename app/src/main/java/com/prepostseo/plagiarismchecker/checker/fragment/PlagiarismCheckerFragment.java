@@ -5,69 +5,48 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-//import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.Display;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.ScrollView;
 import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.itextpdf.awt.geom.CubicCurve2D;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.OnClickListener;
-import com.orhanobut.dialogplus.OnDismissListener;
-import com.orhanobut.dialogplus.ViewHolder;
 import com.prepostseo.plagiarismchecker.R;
+import com.prepostseo.plagiarismchecker.Utils.DocReader;
 import com.prepostseo.plagiarismchecker.activity.MainDrawerActivity;
 import com.prepostseo.plagiarismchecker.activity.ResultActivity;
 import com.prepostseo.plagiarismchecker.api.ApiClient;
-import com.prepostseo.plagiarismchecker.checker.response.PlagiarismDetail;
 import com.prepostseo.plagiarismchecker.checker.response.PlagiarismResponse;
 import com.prepostseo.plagiarismchecker.checker.restInterface.PlagiarismService;
 import com.prepostseo.plagiarismchecker.plans.fragment.PlansFragment;
 
 import org.apache.commons.io.FilenameUtils;
-import org.docx4j.TextUtils;
-import org.docx4j.XmlUtils;
-import org.docx4j.convert.out.html.HtmlExporterNonXSLT;
-import org.docx4j.model.images.ConversionImageHandler;
-import org.docx4j.openpackaging.contenttype.ContentTypeManager;
-import org.docx4j.openpackaging.exceptions.Docx4JException;
-import org.docx4j.openpackaging.io.LoadFromZipNG;
-import org.docx4j.openpackaging.packages.OpcPackage;
-import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.jsoup.Jsoup;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -75,13 +54,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import ae.javax.xml.bind.JAXBElement;
+import ae.javax.xml.bind.JAXBException;
 import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
 import okhttp3.MediaType;
@@ -90,7 +68,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -111,10 +88,13 @@ public class PlagiarismCheckerFragment extends Fragment {
     private String key = "";
     private ProgressDialog pdReadingDocument;
     private ProgressDialog pdChecking;
-//    private TextView uniquePerTextView,plagPerTextView;
     private DialogPlus customDialogBox;
     private ScrollView dialogueBoxView;
     private TextView wordsLimit,currentwords;
+    //variable for storing the time of first click
+    long startTime;
+    //constant for defining the time duration between the click that can be considered as double-tap
+    static final int MAX_DURATION = 200;
 
 
     public PlagiarismCheckerFragment() {
@@ -248,6 +228,7 @@ public class PlagiarismCheckerFragment extends Fragment {
         content.setScroller(new Scroller(getActivity()));
         content.setVerticalScrollBarEnabled(true);
         content.setMovementMethod(new ScrollingMovementMethod());
+        content.clearFocus();
         content.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent event) {
                 // TODO Auto-generated method stub
@@ -256,11 +237,26 @@ public class PlagiarismCheckerFragment extends Fragment {
                     switch (event.getAction()&MotionEvent.ACTION_MASK){
                         case MotionEvent.ACTION_UP:
                             view.getParent().requestDisallowInterceptTouchEvent(false);
+                            startTime = System.currentTimeMillis();
                             break;
                     }
                      if( event.getAction()== MotionEvent.ACTION_DOWN) {
+
                          ((EditText)view).setTextIsSelectable(true);
                          view.getParent().requestDisallowInterceptTouchEvent(false);
+                         //when there is no text just open the keyboard
+                         if(((EditText)view).getText().length() <= 0 )
+                         {
+                             ((InputMethodManager)getActivity(). getSystemService(Context.INPUT_METHOD_SERVICE))
+                                     .showSoftInput(view, InputMethodManager.SHOW_FORCED);
+                         }
+
+                         if(System.currentTimeMillis() - startTime <= MAX_DURATION)
+                         {
+                             //when there is text double tap to open keyboard
+                             ((InputMethodManager)getActivity(). getSystemService(Context.INPUT_METHOD_SERVICE))
+                                     .showSoftInput(view, InputMethodManager.SHOW_FORCED);
+                         }
                      }
                 }
                 return false;
@@ -308,7 +304,7 @@ public class PlagiarismCheckerFragment extends Fragment {
     }
 
     private void showError() {
-       // Toast.makeText(getActivity(), "Allow external storage reading", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Allow external storage reading", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -347,7 +343,7 @@ public class PlagiarismCheckerFragment extends Fragment {
                 else if ("txt".equalsIgnoreCase(ext))
                     readFromTextFile(docPaths.get(0));
                 else
-                    docx4j(docPaths.get(0));
+                    docPoi(docPaths.get(0),ext);
             }
         }
     }
@@ -402,7 +398,7 @@ public class PlagiarismCheckerFragment extends Fragment {
         return ret;
     }
 
-    public void docx4j(final String fileName) {
+    public void docPoi(final String fileName, final String extension) {
 
         pdReadingDocument.show();
         try {
@@ -411,7 +407,9 @@ public class PlagiarismCheckerFragment extends Fragment {
                 public void run() {
                     //TODO your background code
                     try {
-                        final String html=readDocFile(fileName);
+                        StringBuilder stringBuilder=null;
+                        stringBuilder=DocReader.readDocxFile(fileName);
+                        final String html=stringBuilder.toString();
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -439,42 +437,6 @@ public class PlagiarismCheckerFragment extends Fragment {
             Toast.makeText(getActivity(),"Unable to read document",Toast.LENGTH_LONG).show();
         }
     }
-    String readDocFile(String fileName)
-    {
-        InputStream is = null;
-        try {
-            is = new FileInputStream(new File(fileName));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        final LoadFromZipNG loader = new LoadFromZipNG();
-        WordprocessingMLPackage wordMLPackage = null;
-        try {
-
-            wordMLPackage = (WordprocessingMLPackage) loader.get(is);
-        } catch (Docx4JException e) {
-            e.printStackTrace();
-        }
-
-        String IMAGE_DIR_NAME = "images";
-
-        String baseURL = null;
-        try {
-            baseURL = getActivity().getDir(IMAGE_DIR_NAME, MODE_PRIVATE).toURL().toString();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        System.out.println(baseURL);
-
-        ConversionImageHandler conversionImageHandler = new AndroidFileConversionImageHandler(IMAGE_DIR_NAME,
-                baseURL, false, getActivity());
-
-        HtmlExporterNonXSLT withoutXSLT = new HtmlExporterNonXSLT(wordMLPackage, conversionImageHandler);
-
-        final String html = Jsoup.parse(XmlUtils.w3CDomNodeToString(withoutXSLT.export()), "ISO-8859-1").select("body").text();
-        return  html;
-    }
     int getWordsLimit() {
         try
         {
@@ -494,9 +456,10 @@ public class PlagiarismCheckerFragment extends Fragment {
         PlagiarismService plagService = ApiClient.getClient().create(PlagiarismService.class);
         RequestBody keyParam = RequestBody.create(MediaType.parse("text/plain"), key);
         RequestBody dataParam = RequestBody.create(MediaType.parse("text/plain"), data);
+        RequestBody checksourcesParam = RequestBody.create(MediaType.parse("text/plain"), "1");
 
 
-        Call<PlagiarismResponse> call = plagService.checkPlagiarism(keyParam, dataParam);
+        Call<PlagiarismResponse> call = plagService.checkPlagiarism(keyParam, dataParam, checksourcesParam);
         pdChecking.show();
 
         //inflateDialogBoxViewLayout();
