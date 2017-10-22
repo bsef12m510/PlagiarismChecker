@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context="com.prepostseo.plagiarismchecker.aboutUs.fragment.AboutUs"
+    tools:context="com.prepostseo.plagchecker.aboutUs.fragment.AboutUs"
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
