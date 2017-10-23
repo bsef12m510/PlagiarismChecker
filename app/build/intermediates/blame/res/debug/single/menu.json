@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/menu/main_drawer.xml",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/res/menu/main_drawer.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/menu/menu_result.xml",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/res/menu/menu_result.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/menu/menu_public.xml",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/res/menu/menu_public.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/menu/menu_main.xml",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/res/menu/menu_main.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/menu/activity_main_drawer_drawer.xml",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/res/menu/activity_main_drawer_drawer.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/menu/picker_menu.xml",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/res/menu/picker_menu.xml"
+    }
+]

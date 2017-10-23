@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.prepostseo.plagchecker.contactUs.fragment.ContactUs">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="10"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="true"
+            android:overScrollMode="always"
+            android:cursorVisible="true"
+            android:layout_margin="10dp"
+            android:longClickable="true"
+            android:hint="Send us what's in your mind.."
+            android:textAlignment="viewStart"
+            android:focusable="true"
+            android:padding="10dp"
+            android:background="@drawable/shadow_background"
+            android:gravity="start"
+            android:id="@+id/message"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:text="Send"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorAccent"
+            android:id="@+id/submit"
+            android:layout_gravity="right" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "474320465644",
-    "project_id": "firebase-plagiarism-checker"
+    "project_number": "352295773036",
+    "project_id": "plagiarism-checker-2e328"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:474320465644:android:f96b7d2db41cca85",
+        "mobilesdk_app_id": "1:352295773036:android:b998954f0634cfeb",
         "android_client_info": {
-          "package_name": "com.prepostseo.plagiarismchecker"
+          "package_name": "com.prepostseo.plagchecker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "474320465644-337giurvfbv48vgo05im0q5bo32g3ltk.apps.googleusercontent.com",
+          "client_id": "352295773036-20lc9c7hh0dlfftb1ermf8jvsasc40vm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.prepostseo.plagiarismchecker",
-            "certificate_hash": "4fce5b37418427cd969af3c66367831cbf6187af"
+            "package_name": "com.prepostseo.plagchecker",
+            "certificate_hash": "2318086d8b86e115736e9d758ca8141d5ebad0cf"
           }
         },
         {
-          "client_id": "474320465644-ua6k9cis9brsbk0jlk9vn539obloebmp.apps.googleusercontent.com",
+          "client_id": "352295773036-e1th0887okviutgatdrjdsdok1b32v6g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAT_M8v8pR3lc2sq8S5LsvOQjggntl8o28"
+          "current_key": "AIzaSyCSS3gZ53LVb2F_R6ffdbZlEXNICRRejJs"
         }
       ],
       "services": {

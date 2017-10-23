@@ -1,0 +1,90 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.prepostseo.plagchecker.Login.fragment.LoginFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="fill_vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height = "40dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/prepostseo"
+                android:layout_gravity="center_horizontal|center" />
+            <View
+                style="@style/Divider" android:layout_height="0.5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height = "50dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/icon_email"
+                        android:layout_gravity="center_horizontal|center" />
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_marginTop = "10dp"
+                        android:layout_marginBottom = "10dp"
+                        android:layout_marginLeft = "30dp"
+                        android:layout_marginRight = "30dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text = "@string/please_check_your_email_you_will_receive_a_verification_code_via_email"
+                        android:textColor = "@android:color/darker_gray"
+                        android:textAlignment="center"
+                        android:textSize = "20sp" />
+
+                    <com.dpizarro.pinview.library.PinView
+                        android:id="@+id/pinView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop = "10dp"
+                        android:layout_marginBottom = "10dp"
+                        android:text="@string/confirm"
+                        android:id="@+id/verifyButton"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/colorAccent"
+                        style="@style/Button" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+
+
+

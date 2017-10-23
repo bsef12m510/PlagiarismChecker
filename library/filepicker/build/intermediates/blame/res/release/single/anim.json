@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/design_snackbar_out.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/res/anim/design_snackbar_out.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/abc_fade_in.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/anim/abc_fade_in.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/anim/abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/abc_slide_in_top.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/anim/abc_slide_in_top.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/abc_popup_exit.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/anim/abc_popup_exit.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/slide_left_in.xml",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/src/main/res/anim/slide_left_in.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/abc_popup_enter.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/design_bottom_sheet_slide_in.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/res/anim/design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/design_fab_in.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/res/anim/design_fab_in.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/slide_left_out.xml",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/src/main/res/anim/slide_left_out.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/design_bottom_sheet_slide_out.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/res/anim/design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/anim/abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/design_snackbar_in.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/res/anim/design_snackbar_in.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/anim/abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/abc_fade_out.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/anim/abc_fade_out.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/design_fab_out.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/res/anim/design_fab_out.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/release/anim/abc_slide_out_top.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/anim/abc_slide_out_top.xml"
+    }
+]

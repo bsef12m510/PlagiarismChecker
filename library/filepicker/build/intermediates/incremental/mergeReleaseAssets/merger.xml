@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/src/main/assets"/><source path="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/src/release/assets"/></dataSet></merger>

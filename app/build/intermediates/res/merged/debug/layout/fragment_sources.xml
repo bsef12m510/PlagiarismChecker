@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/table_layout">
+        <TableRow
+            android:background="@drawable/shadow_background_results_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:layout_weight="7"
+                android:textSize="14sp"
+                android:text="Sources" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/bg_gray"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_weight="3"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
+                android:text="Similarity" />
+        </TableRow>
+    </TableLayout>
+</ScrollView>

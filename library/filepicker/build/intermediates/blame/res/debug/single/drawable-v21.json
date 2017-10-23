@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/debug/drawable-v21/avd_hide_password.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/res/drawable-v21/avd_hide_password.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/debug/drawable-v21/avd_show_password.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/res/drawable-v21/avd_show_password.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/debug/drawable-v21/design_bottom_navigation_item_background.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/res/drawable-v21/design_bottom_navigation_item_background.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/res/merged/debug/drawable-v21/design_password_eye.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/res/drawable-v21/design_password_eye.xml"
+    }
+]

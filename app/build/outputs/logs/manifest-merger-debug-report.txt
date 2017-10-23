@@ -1,0 +1,213 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:2:1-51:12
+	package
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:3:5-41
+		INJECTED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:5:5-67
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:6:5-80
+MERGED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:12:5-80
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:6:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:7:5-81
+MERGED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:11:5-81
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:7:22-78
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:8:5-79
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:8:22-76
+uses-permission#com.android.vending.BILLING
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:9:5-67
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:9:22-64
+application
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:11:5-49:19
+MERGED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:14:5-33:19
+MERGED from [com.android.support:design:25.3.1] /Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:transition:25.3.1] /Users/macbookproretina/.android/build-cache/48f2fba3c2b5b188b90226ccc8ab313064f7b335/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:appcompat-v7:25.3.1] /Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/macbookproretina/.android/build-cache/a7425584542e51e1b6cbea4c6193f34fbfa236d0/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/macbookproretina/.android/build-cache/ef113057a3561740373b1a86377f4944300096a7/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/macbookproretina/.android/build-cache/6998504c15325be318d93120b57e1ab024f26b41/output/AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-auth:8.3.0] /Users/macbookproretina/.android/build-cache/c5955a6fe555867710192b81580843195ac8eec8/output/AndroidManifest.xml:20:5-25:19
+MERGED from [com.google.android.gms:play-services-basement:8.3.0] /Users/macbookproretina/.android/build-cache/d96af505b7bfcfb0d37af4c1fb1155c026b3008c/output/AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:25.3.1] /Users/macbookproretina/.android/build-cache/79f26caafe0660bc4e836d4199656bb6a67fc2f8/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] /Users/macbookproretina/.android/build-cache/565e5b0a615f1f960468bd0094f06a9fdd5e6a34/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] /Users/macbookproretina/.android/build-cache/9d1f403ab6a6e6e2066dd28dea076f344672d594/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] /Users/macbookproretina/.android/build-cache/9451a411bdf109366c0f77a0292936c0ea029815/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] /Users/macbookproretina/.android/build-cache/8113ae5084639b714d134b99d8ae478ef4c266c6/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:25.3.1] /Users/macbookproretina/.android/build-cache/1d41ec69c359dbb6e1626a5a95b067d0e745ae5a/output/AndroidManifest.xml:29:5-20
+	android:label
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:15:9-41
+	android:supportsRtl
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:16:9-35
+	android:allowBackup
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:13:9-35
+	android:icon
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:14:9-43
+	android:theme
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:17:9-40
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:12:9-64
+receiver#com.prepostseo.plagchecker.ConnectivityReceiver
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:18:9-24:20
+	android:enabled
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:20:13-35
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:19:13-75
+intent-filter#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:21:13-23:29
+action#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:22:17-79
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:22:25-76
+activity#com.prepostseo.plagchecker.activity.SplashActivity
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:26:9-34:20
+	android:theme
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:28:13-47
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:27:13-78
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:29:13-33:29
+action#android.intent.action.MAIN
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:30:17-69
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:30:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:32:17-77
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:32:27-74
+activity#com.prepostseo.plagchecker.activity.PublicActivity
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:35:9-38:49
+	android:label
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:37:13-45
+	android:theme
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:38:13-46
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:36:13-78
+activity#com.prepostseo.plagchecker.activity.MainDrawerActivity
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:39:9-43:59
+	android:label
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:41:13-63
+	android:windowSoftInputMode
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:42:13-54
+	android:theme
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:43:13-56
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:40:13-82
+activity#com.prepostseo.plagchecker.activity.ResultActivity
+ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:44:9-48:98
+	android:label
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:46:13-58
+	android:parentActivityName
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:48:13-96
+	android:theme
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:47:13-47
+	android:name
+		ADDED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml:45:13-78
+uses-sdk
+INJECTED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:design:25.3.1] /Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:recyclerview-v7:25.3.1] /Users/macbookproretina/.android/build-cache/f3dcfdaaeddb2abac09a21709f81b1bf3533585c/output/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:transition:25.3.1] /Users/macbookproretina/.android/build-cache/48f2fba3c2b5b188b90226ccc8ab313064f7b335/output/AndroidManifest.xml:20:5-44
+MERGED from [com.github.davidpizarro:pinview:1.0.0] /Users/macbookproretina/.android/build-cache/f6c4b42f22a81cb7078e22c4a4711d2ed3eb239d/output/AndroidManifest.xml:6:5-8:41
+MERGED from [com.android.support:appcompat-v7:25.3.1] /Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/macbookproretina/.android/build-cache/a7425584542e51e1b6cbea4c6193f34fbfa236d0/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/macbookproretina/.android/build-cache/ef113057a3561740373b1a86377f4944300096a7/output/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:multidex:1.0.0] /Users/macbookproretina/.android/build-cache/8fd8c3cd9694c0a30d8f08edeb545b31c1a42571/output/AndroidManifest.xml:18:5-42
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/macbookproretina/.android/build-cache/6998504c15325be318d93120b57e1ab024f26b41/output/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-auth:8.3.0] /Users/macbookproretina/.android/build-cache/c5955a6fe555867710192b81580843195ac8eec8/output/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-base:8.3.0] /Users/macbookproretina/.android/build-cache/fffbc18130d9cb4b072f84e23f2393f4e204af53/output/AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-basement:8.3.0] /Users/macbookproretina/.android/build-cache/d96af505b7bfcfb0d37af4c1fb1155c026b3008c/output/AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:25.3.1] /Users/macbookproretina/.android/build-cache/79f26caafe0660bc4e836d4199656bb6a67fc2f8/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] /Users/macbookproretina/.android/build-cache/565e5b0a615f1f960468bd0094f06a9fdd5e6a34/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] /Users/macbookproretina/.android/build-cache/9d1f403ab6a6e6e2066dd28dea076f344672d594/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.1] /Users/macbookproretina/.android/build-cache/9451a411bdf109366c0f77a0292936c0ea029815/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.1] /Users/macbookproretina/.android/build-cache/8113ae5084639b714d134b99d8ae478ef4c266c6/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:25.3.1] /Users/macbookproretina/.android/build-cache/1d41ec69c359dbb6e1626a5a95b067d0e745ae5a/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.orhanobut:dialogplus:1.11] /Users/macbookproretina/.android/build-cache/4c8d86177333f08c6e4166a4890be676f839dc9a/output/AndroidManifest.xml:6:5-8:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:25.3.1] /Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/AndroidManifest.xml
+activity#droidninja.filepicker.FilePickerActivity
+ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:17:9-19:62
+	android:configChanges
+		ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:19:13-59
+	android:name
+		ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:18:13-68
+activity#droidninja.filepicker.MediaDetailsActivity
+ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:20:9-22:62
+	android:configChanges
+		ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:22:13-59
+	android:name
+		ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:21:13-70
+provider#droidninja.filepicker.utils.FilePickerProvider
+ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:24:9-32:20
+	android:authorities
+		ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:26:13-82
+	android:grantUriPermissions
+		ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:28:13-47
+	android:exported
+		ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:25:13-74
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:29:13-31:58
+	android:resource
+		ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:31:17-55
+	android:name
+		ADDED from [com.droidninja:filepicker:2.0.8] /Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/library/filepicker/build/intermediates/bundles/default/AndroidManifest.xml:30:17-67
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:25.3.1] /Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:recyclerview-v7:25.3.1] /Users/macbookproretina/.android/build-cache/f3dcfdaaeddb2abac09a21709f81b1bf3533585c/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:transition:25.3.1] /Users/macbookproretina/.android/build-cache/48f2fba3c2b5b188b90226ccc8ab313064f7b335/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:appcompat-v7:25.3.1] /Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/macbookproretina/.android/build-cache/a7425584542e51e1b6cbea4c6193f34fbfa236d0/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/macbookproretina/.android/build-cache/ef113057a3561740373b1a86377f4944300096a7/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-v4:25.3.1] /Users/macbookproretina/.android/build-cache/79f26caafe0660bc4e836d4199656bb6a67fc2f8/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] /Users/macbookproretina/.android/build-cache/565e5b0a615f1f960468bd0094f06a9fdd5e6a34/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] /Users/macbookproretina/.android/build-cache/9d1f403ab6a6e6e2066dd28dea076f344672d594/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] /Users/macbookproretina/.android/build-cache/9451a411bdf109366c0f77a0292936c0ea029815/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] /Users/macbookproretina/.android/build-cache/8113ae5084639b714d134b99d8ae478ef4c266c6/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-compat:25.3.1] /Users/macbookproretina/.android/build-cache/1d41ec69c359dbb6e1626a5a95b067d0e745ae5a/output/AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:design:25.3.1] /Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:design:25.3.1] /Users/macbookproretina/.android/build-cache/35842691815eddfaf8a1c5bbeb02a99233c5573d/output/AndroidManifest.xml:26:9-47
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:8.3.0] /Users/macbookproretina/.android/build-cache/c5955a6fe555867710192b81580843195ac8eec8/output/AndroidManifest.xml:21:9-24:46
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:8.3.0] /Users/macbookproretina/.android/build-cache/c5955a6fe555867710192b81580843195ac8eec8/output/AndroidManifest.xml:23:19-52
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:8.3.0] /Users/macbookproretina/.android/build-cache/c5955a6fe555867710192b81580843195ac8eec8/output/AndroidManifest.xml:24:19-43
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:8.3.0] /Users/macbookproretina/.android/build-cache/c5955a6fe555867710192b81580843195ac8eec8/output/AndroidManifest.xml:22:19-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:8.3.0] /Users/macbookproretina/.android/build-cache/c5955a6fe555867710192b81580843195ac8eec8/output/AndroidManifest.xml:21:19-72
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:8.3.0] /Users/macbookproretina/.android/build-cache/d96af505b7bfcfb0d37af4c1fb1155c026b3008c/output/AndroidManifest.xml:21:9-23:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:8.3.0] /Users/macbookproretina/.android/build-cache/d96af505b7bfcfb0d37af4c1fb1155c026b3008c/output/AndroidManifest.xml:23:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:8.3.0] /Users/macbookproretina/.android/build-cache/d96af505b7bfcfb0d37af4c1fb1155c026b3008c/output/AndroidManifest.xml:22:13-58

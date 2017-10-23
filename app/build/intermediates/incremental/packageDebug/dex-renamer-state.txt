@@ -1,0 +1,7 @@
+#Mon Oct 23 23:16:50 PKT 2017
+base.0=/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4670d76843b30f558f207d73200d569c5f284cb8
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_2bb498a30cbeec74f07406ca8733a9eeb48dc60e/classes.dex
+base.1=/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_2bb498a30cbeec74f07406ca8733a9eeb48dc60e
+file.0=/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4670d76843b30f558f207d73200d569c5f284cb8/classes.dex
