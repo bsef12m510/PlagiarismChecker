@@ -164,7 +164,14 @@ public class AccountInfoFragment extends Fragment {
         }
     }
     private String getFormatedAmount(String amount){
-        return NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(amount));
+
+        try {
+            amount =NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(amount));
+        }catch (Exception ex)
+        {
+            System.out.print(ex.getMessage());
+        }
+        return amount;
     }
 
 }

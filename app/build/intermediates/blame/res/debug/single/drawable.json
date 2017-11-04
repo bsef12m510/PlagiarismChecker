@@ -4,12 +4,12 @@
         "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/drawable/abc_list_selector_background_transition_holo_light.xml"
     },
     {
-        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable/abc_vector_test.xml",
-        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/drawable/abc_vector_test.xml"
-    },
-    {
         "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable/shadow_background_unique.xml",
         "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/res/drawable/shadow_background_unique.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable/abc_vector_test.xml",
+        "source": "/Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/res/drawable/abc_vector_test.xml"
     },
     {
         "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable/abc_switch_thumb_material.xml",
@@ -48,12 +48,12 @@
         "source": "/Users/macbookproretina/.android/build-cache/fffbc18130d9cb4b072f84e23f2393f4e204af53/output/res/drawable/common_plus_signin_btn_text_light.xml"
     },
     {
-        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable/shadow_background_results_header.xml",
-        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/res/drawable/shadow_background_results_header.xml"
-    },
-    {
         "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable/splash_background.xml",
         "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/res/drawable/splash_background.xml"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable/shadow_background_results_header.xml",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/res/drawable/shadow_background_results_header.xml"
     },
     {
         "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark.xml",

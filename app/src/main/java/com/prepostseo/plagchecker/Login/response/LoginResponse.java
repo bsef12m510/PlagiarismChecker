@@ -8,6 +8,7 @@ public class LoginResponse {
     private String user_email;
     private String queries_limit;
     private String expire_date;
+    private String error;
 
     public String getQueries_used() {
         return queries_used;
@@ -55,6 +56,13 @@ public class LoginResponse {
 
     public void setUser_email(String user_email) {
         this.user_email = user_email;
+    }
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 
     private String queries_used;

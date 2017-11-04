@@ -3,12 +3,12 @@
 
     <item
         is-multidex="true"
-        jar="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="ca1d64086425426ccf42b634b284550845cbb54d">
-        <dex dex="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_2bb498a30cbeec74f07406ca8733a9eeb48dc60e/classes.dex" />
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4670d76843b30f558f207d73200d569c5f284cb8/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -21,15 +21,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4670d76843b30f558f207d73200d569c5f284cb8/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/libs/poishadow-all.jar"
         jumboMode="true"
         optimize="true"
@@ -38,6 +29,15 @@
         <dex dex="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/2/poishadow-all_f3abbc7b2e44501b22d00c35c1b01e67675eff9d/classes3.dex" />
         <dex dex="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/2/poishadow-all_f3abbc7b2e44501b22d00c35c1b01e67675eff9d/classes2.dex" />
         <dex dex="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/2/poishadow-all_f3abbc7b2e44501b22d00c35c1b01e67675eff9d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c56f953226b0791da9bde11b4365dcb2ecaf84c1">
+        <dex dex="/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_2bb498a30cbeec74f07406ca8733a9eeb48dc60e/classes.dex" />
     </item>
 
 </items>

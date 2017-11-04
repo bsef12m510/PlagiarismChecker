@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -106,13 +107,22 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
 
     @Override
     public void onLoginResponse(LoginResponse loginResponseData) {
-        if(loginResponseData != null && loginResponseData.getVerified().equalsIgnoreCase("1")) {
-            if(loginResponseData.getApi_key()!=null)
-                storeUserData(loginResponseData);
-            Toast.makeText(PublicActivity.this, "Login with user : " + loginResponseData.getUser_email(), Toast.LENGTH_SHORT).show();
-            startDrawerActivity();
-        }else{
-            Toast.makeText(PublicActivity.this, "User not verified" , Toast.LENGTH_SHORT).show();
+
+        if(loginResponseData.getResponse()!=null && loginResponseData.getResponse().equals(1)) {
+            if (loginResponseData.getVerified().equalsIgnoreCase("1")) {
+                if (loginResponseData.getApi_key() != null)
+                    storeUserData(loginResponseData);
+                Toast.makeText(PublicActivity.this, "Login with user : " + loginResponseData.getUser_email(), Toast.LENGTH_SHORT).show();
+                startDrawerActivity();
+            } else {
+                Toast.makeText(PublicActivity.this, "User not verified", Toast.LENGTH_LONG).show();
+                if(loginResponseData.getUser_id()!=null && !loginResponseData.getUser_id().isEmpty()) {
+                    user_id = Integer.parseInt(loginResponseData.getUser_id());
+                    displayFragment(3);
+                }
+            }
+        }else {
+            Toast.makeText(PublicActivity.this, loginResponseData.getError(), Toast.LENGTH_LONG).show();
         }
     }
 

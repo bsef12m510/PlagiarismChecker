@@ -5,8 +5,10 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -17,8 +19,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.prepostseo.plagchecker.ConnectivityReceiver;
+import com.prepostseo.plagchecker.MyApplication;
 import com.prepostseo.plagchecker.R;
 import com.prepostseo.plagchecker.aboutUs.fragment.AboutUs;
 import com.prepostseo.plagchecker.accountDetails.fragment.AccountInfoFragment;
@@ -27,7 +32,7 @@ import com.prepostseo.plagchecker.contactUs.fragment.ContactUs;
 import com.prepostseo.plagchecker.plans.fragment.PlansFragment;
 
 public class MainDrawerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PlagiarismCheckerFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, PlagiarismCheckerFragment.OnFragmentInteractionListener , ConnectivityReceiver.ConnectivityReceiverListener{
 
     private boolean fromPlagFragment = false;
     private static String TAG_PLAG = "plagFrag";
@@ -35,6 +40,7 @@ public class MainDrawerActivity extends AppCompatActivity
     public static String TAG_PLANS = "plansFragment";
     public static String TAG_ABOUT = "aboutFragment";
     public static String TAG_CONTACT = "contactFragment";
+    private DrawerLayout fragmentContainer;
 
     public NavigationView navigationView;
 
@@ -43,6 +49,7 @@ public class MainDrawerActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_drawer);
+        initialize();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -140,6 +147,9 @@ public class MainDrawerActivity extends AppCompatActivity
         startActivity(intent);
         finish();
     }
+    public void initialize() {
+        fragmentContainer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    }
 
     public void deleteApiKey() {
         SharedPreferences prefs = this.getSharedPreferences(
@@ -180,5 +190,47 @@ public class MainDrawerActivity extends AppCompatActivity
         }
         fragment.onActivityResult(requestCode, resultCode, data);
 
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
+    }
+    // Method to manually check connection status
+    public boolean checkConnection() {
+
+        boolean isConnected = ConnectivityReceiver.isConnected();
+        if(!isConnected)
+        {
+            showSnack(isConnected);
+        }
+        return isConnected;
+    }
+    // Showing the status in Snackbar
+    private void showSnack(boolean isConnected) {
+        String message;
+        int color;
+        if (isConnected) {
+            message = "Good! Connected to Internet";
+            color = Color.WHITE;
+        } else {
+            message = "Sorry! Not connected to internet";
+            color = Color.RED;
+        }
+
+        Snackbar snackbar = Snackbar.make(fragmentContainer, message, Snackbar.LENGTH_LONG);
+
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(color);
+        snackbar.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // register connection status listener
+        MyApplication.getInstance().setConnectivityListener(this);
     }
 }

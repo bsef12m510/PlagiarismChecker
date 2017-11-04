@@ -130,7 +130,7 @@ MERGED from [com.github.davidpizarro:pinview:1.0.0] /Users/macbookproretina/.and
 MERGED from [com.android.support:appcompat-v7:25.3.1] /Users/macbookproretina/.android/build-cache/2227014876e9e8c3ad0cf867b623f874bcbdcec6/output/AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/macbookproretina/.android/build-cache/a7425584542e51e1b6cbea4c6193f34fbfa236d0/output/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/macbookproretina/.android/build-cache/ef113057a3561740373b1a86377f4944300096a7/output/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:multidex:1.0.0] /Users/macbookproretina/.android/build-cache/8fd8c3cd9694c0a30d8f08edeb545b31c1a42571/output/AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:multidex:1.0.1] /Users/macbookproretina/.android/build-cache/33550e0a0eb04444793f37a8185e50b0324fe16f/output/AndroidManifest.xml:18:5-42
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/macbookproretina/.android/build-cache/6998504c15325be318d93120b57e1ab024f26b41/output/AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.gms:play-services-auth:8.3.0] /Users/macbookproretina/.android/build-cache/c5955a6fe555867710192b81580843195ac8eec8/output/AndroidManifest.xml:18:5-43
 MERGED from [com.google.android.gms:play-services-base:8.3.0] /Users/macbookproretina/.android/build-cache/fffbc18130d9cb4b072f84e23f2393f4e204af53/output/AndroidManifest.xml:18:5-42

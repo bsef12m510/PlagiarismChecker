@@ -39,6 +39,7 @@ import com.orhanobut.dialogplus.DialogPlus;
 import com.prepostseo.plagchecker.R;
 import com.prepostseo.plagchecker.Utils.DocReader;
 import com.prepostseo.plagchecker.activity.MainDrawerActivity;
+import com.prepostseo.plagchecker.activity.PublicActivity;
 import com.prepostseo.plagchecker.activity.ResultActivity;
 import com.prepostseo.plagchecker.api.ApiClient;
 import com.prepostseo.plagchecker.checker.response.PlagiarismResponse;
@@ -167,8 +168,10 @@ public class PlagiarismCheckerFragment extends Fragment {
                     showWordsLimitDialogueBox();
                 }
                 else {
-                    content.setError(null);
-                    callPlagiarismService(content.getText().toString());
+                    if(((MainDrawerActivity)getActivity()).checkConnection()) {
+                        content.setError(null);
+                        callPlagiarismService(content.getText().toString());
+                    }
                 }
             }
         });
