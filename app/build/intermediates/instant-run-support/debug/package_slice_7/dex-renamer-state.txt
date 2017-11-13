@@ -1,4 +1,0 @@
-#Mon Oct 23 23:16:49 PKT 2017
-base.0=/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7
-renamed.0=classes.dex
-file.0=/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex

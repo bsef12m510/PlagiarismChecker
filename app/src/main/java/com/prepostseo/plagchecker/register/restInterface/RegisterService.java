@@ -1,6 +1,7 @@
 package com.prepostseo.plagchecker.register.restInterface;
 
 import com.prepostseo.plagchecker.register.response.RegisterResponse;
+import com.prepostseo.plagchecker.register.response.ResendActivationResponse;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -19,4 +20,8 @@ public interface RegisterService
     @Multipart
     @POST("app/verifyEmail")
     Call<RegisterResponse> verify( @Part("code") RequestBody code, @Part("user_id") RequestBody user_id);
+
+    @Multipart
+    @POST("app/resendActivation")
+    Call<ResendActivationResponse> resendActivation(@Part("user_id") RequestBody user_id,@Part("resend") RequestBody resend);
 }

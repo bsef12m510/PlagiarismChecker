@@ -1,8 +1,10 @@
 package com.prepostseo.plagchecker.activity;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -30,6 +32,7 @@ import com.prepostseo.plagchecker.accountDetails.fragment.AccountInfoFragment;
 import com.prepostseo.plagchecker.checker.fragment.PlagiarismCheckerFragment;
 import com.prepostseo.plagchecker.contactUs.fragment.ContactUs;
 import com.prepostseo.plagchecker.plans.fragment.PlansFragment;
+import com.prepostseo.plagchecker.reports.ReportFragment;
 
 public class MainDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PlagiarismCheckerFragment.OnFragmentInteractionListener , ConnectivityReceiver.ConnectivityReceiverListener{
@@ -37,13 +40,13 @@ public class MainDrawerActivity extends AppCompatActivity
     private boolean fromPlagFragment = false;
     private static String TAG_PLAG = "plagFrag";
     private static String TAG_ACCOUNT_INFO = "infoFrag";
+    private static String TAG_REPORTS = "reportsFrag";
     public static String TAG_PLANS = "plansFragment";
     public static String TAG_ABOUT = "aboutFragment";
     public static String TAG_CONTACT = "contactFragment";
     private DrawerLayout fragmentContainer;
 
     public NavigationView navigationView;
-
     private TextView userNameTextView,emailTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,7 @@ public class MainDrawerActivity extends AppCompatActivity
         userNameTextView.setText(shared.getString("username", ""));
         emailTextView.setText(shared.getString("email",""));
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -82,6 +86,18 @@ public class MainDrawerActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //preventing default implementation previous to android.os.Build.VERSION_CODES.ECLAIR
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -113,10 +129,12 @@ public class MainDrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-
             Fragment fragment = new PlagiarismCheckerFragment();
             replaceFragment(fragment,TAG_PLAG);
             // Handle the camera action
+        } else if (id == R.id.nav_reports) {
+            Fragment fragment = new ReportFragment();
+            replaceFragment(fragment,TAG_REPORTS);
         } else if (id == R.id.nav_account) {
             Fragment fragment = new AccountInfoFragment();
             replaceFragment(fragment,TAG_ACCOUNT_INFO);
@@ -133,6 +151,9 @@ public class MainDrawerActivity extends AppCompatActivity
         else if (id == R.id.nav_contact) {
             Fragment fragment = new ContactUs();
             replaceFragment(fragment, TAG_CONTACT);
+        }
+        else if (id == R.id.nav_exit) {
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -170,14 +191,7 @@ public class MainDrawerActivity extends AppCompatActivity
                 .replace(R.id.content_frame, fragment,TAG)
                 .commit();
     }
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            //preventing default implementation previous to android.os.Build.VERSION_CODES.ECLAIR
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

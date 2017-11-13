@@ -1,13 +1,16 @@
 package com.prepostseo.plagchecker.activity;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -103,8 +106,6 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
     @Override
     public void onLoginResponse(LoginResponse loginResponseData) {
 
@@ -158,8 +159,8 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
     @Override
     public void onVerifyResponse(boolean isVerified) {
         if (isVerified) {
-            Toast.makeText(PublicActivity.this, "Verified", Toast.LENGTH_LONG).show();
-            startDrawerActivity();
+            Toast.makeText(PublicActivity.this, "Verified, please login now", Toast.LENGTH_LONG).show();
+            displayFragment(1);
         }
     }
 
@@ -181,7 +182,7 @@ public class PublicActivity extends AppCompatActivity implements LoginFragment.O
     public void startDrawerActivity(){
 
         Intent intent = new Intent(PublicActivity.this,MainDrawerActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

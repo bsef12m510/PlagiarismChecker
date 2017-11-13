@@ -832,11 +832,14 @@
     <string name="permission_camera_never_askagain">Camera permission was denied with never ask again.</string>
     <string name="permission_camera_rationale">Camera permission is needed to show the camera preview.</string>
     <string name="permission_contacts_rationale">Contacts permissions are needed to demonstrate access to the contacts database.</string>
-    <string name="please_check_your_email_you_will_receive_a_verification_code_via_email">Please check your Email you will receive a verification code via Email</string>
+    <string name="please_check_your_email_you_will_receive_a_verification_code_via_email">Please check your email you will receive a verification code via Email</string>
     <string name="ppt_title">PPT</string>
     <string name="quries_limit"><u>Quries Limit</u></string>
     <string name="quries_used"><u>Quries Used</u></string>
     <string name="register">Register</string>
+    <string name="reports">Reports</string>
+    <string name="resendEmail">Resend Email</string>
+    <string name="resend_text">If you didn\'t receive an email then click on resend email button</string>
     <string name="search_menu_title">Search</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="select_doc_text">Select a document</string>

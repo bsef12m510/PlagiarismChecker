@@ -166,7 +166,7 @@ public class AccountInfoFragment extends Fragment {
     private String getFormatedAmount(String amount){
 
         try {
-            amount =NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(amount));
+            amount = NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(amount));
         }catch (Exception ex)
         {
             System.out.print(ex.getMessage());

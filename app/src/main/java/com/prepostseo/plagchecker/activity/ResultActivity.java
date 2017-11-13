@@ -1,10 +1,14 @@
 package com.prepostseo.plagchecker.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.app.Fragment;
@@ -12,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -68,7 +73,6 @@ public class ResultActivity extends AppCompatActivity {
         // To retrieve object in second Activity
         response = (PlagiarismResponse)getIntent().getSerializableExtra("response");
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -199,7 +203,7 @@ public class ResultActivity extends AppCompatActivity {
     }
     static LinearLayout inflateSourceItemLayout(LayoutInflater inflater)
     {
-        return (TableRow)inflater.inflate(R.layout.sources_cell, null);
+        return (LinearLayout)inflater.inflate(R.layout.sources_cell, null);
     }
     static LinearLayout inflatePlagiarizedItemLayout(LayoutInflater inflater)
     {

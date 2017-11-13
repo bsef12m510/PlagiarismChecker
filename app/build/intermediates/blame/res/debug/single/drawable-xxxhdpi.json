@@ -42,5 +42,13 @@
     {
         "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-xxxhdpi/splash.png",
         "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/src/main/res/drawable-xxxhdpi/splash.png"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-xxxhdpi/ic_exit.png",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/generated/res/pngs/debug/drawable-xxxhdpi/ic_exit.png"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-xxxhdpi/ic_reports.png",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/generated/res/pngs/debug/drawable-xxxhdpi/ic_reports.png"
     }
 ]

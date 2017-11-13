@@ -18,14 +18,17 @@
     <string name="full_name">Full Name</string>
     <string name="email_account">Email Account</string>
     <string name="username">Username</string>
-    <string name="please_check_your_email_you_will_receive_a_verification_code_via_email">Please check your Email you will receive a verification code via Email</string>
+    <string name="please_check_your_email_you_will_receive_a_verification_code_via_email">Please check your email you will receive a verification code via Email</string>
+    <string name="resend_text">If you didn\'t receive an email then click on resend email button</string>
     <string name="hash">####</string>
     <string name="confirm">Confirm</string>
+    <string name="resendEmail">Resend Email</string>
     <string name="title_activity_main_drawer">MainDrawerActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="account">Account</string>
+    <string name="reports">Reports</string>
     <string name="logout">Logout</string>
     <string name="upload_file">Select File</string>
     <string name="docx_pdf_txt">.docx/.pdf/.txt</string>

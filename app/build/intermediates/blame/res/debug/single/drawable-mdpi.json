@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_exit.png",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/generated/res/pngs/debug/drawable-mdpi/ic_exit.png"
+    },
+    {
         "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-mdpi/common_google_signin_btn_text_light_disabled.9.png",
         "source": "/Users/macbookproretina/.android/build-cache/fffbc18130d9cb4b072f84e23f2393f4e204af53/output/res/drawable-mdpi/common_google_signin_btn_text_light_disabled.9.png"
     },
@@ -134,6 +138,10 @@
     {
         "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-mdpi/common_plus_signin_btn_text_light_focused.9.png",
         "source": "/Users/macbookproretina/.android/build-cache/fffbc18130d9cb4b072f84e23f2393f4e204af53/output/res/drawable-mdpi/common_plus_signin_btn_text_light_focused.9.png"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_reports.png",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/generated/res/pngs/debug/drawable-mdpi/ic_reports.png"
     },
     {
         "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_contact_mail.png",

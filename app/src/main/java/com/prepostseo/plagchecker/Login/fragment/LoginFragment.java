@@ -141,7 +141,6 @@ public class LoginFragment extends Fragment {
                     pd.hide();
                     if (response != null) {
                         loginResponseData = (LoginResponse) response.body();
-
                         onSuccessfulLogin(loginResponseData);
                     }
                 }

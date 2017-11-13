@@ -8,8 +8,8 @@ android {
         applicationId "com.prepostseo.plagchecker"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 7
-        versionName "7.0"
+        versionCode 11
+        versionName "8.02"
         multiDexEnabled true
     }
     sourceSets {
@@ -39,6 +39,7 @@ android {
         abortOnError false
     }
 }
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')

@@ -32,12 +32,20 @@
         "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/generated/res/pngs/debug/drawable-ldpi/ic_shopping_cart.png"
     },
     {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-ldpi/ic_reports.png",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/generated/res/pngs/debug/drawable-ldpi/ic_reports.png"
+    },
+    {
         "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-ldpi/ic_about_us.png",
         "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/generated/res/pngs/debug/drawable-ldpi/ic_about_us.png"
     },
     {
         "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-ldpi/ic_home.png",
         "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/generated/res/pngs/debug/drawable-ldpi/ic_home.png"
+    },
+    {
+        "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-ldpi/ic_exit.png",
+        "source": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/generated/res/pngs/debug/drawable-ldpi/ic_exit.png"
     },
     {
         "merged": "/Users/macbookproretina/Documents/Projects/Android/PlagiarismChecker/app/build/intermediates/res/merged/debug/drawable-ldpi/ic_mode_edit.png",
